@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  internet: false
+  maganzine: MyString
+  ad: MyString
+  article: MyString
+  kumon_ad: false
+  family_recommendation: false
+  friend_recommendation: false
+  school_recommendation: false
+  another_recommendation: MyString
+
+two:
+  student: two
+  internet: false
+  maganzine: MyString
+  ad: MyString
+  article: MyString
+  kumon_ad: false
+  family_recommendation: false
+  friend_recommendation: false
+  school_recommendation: false
+  another_recommendation: MyString
