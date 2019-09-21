@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  improve_math_grades: false
+  prepare_for_next_grade: false
+  improve_studying_habits: false
+  friend_recommendation: false
+  family_recommendation: false
+  school_recommendation: false
+  another_reason: MyString
+
+two:
+  student: two
+  improve_math_grades: false
+  prepare_for_next_grade: false
+  improve_studying_habits: false
+  friend_recommendation: false
+  family_recommendation: false
+  school_recommendation: false
+  another_reason: MyString
