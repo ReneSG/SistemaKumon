@@ -34,8 +34,16 @@ class Login extends React.Component {
         <header className="Login-header">
           <h1>Login</h1>
         </header>
-        <TextInput name="Correo" changeHandler={(event) => this.handleChange("email", event.target.value)}/>
-        <PasswordInput name="Contraseña" changeHandler={(event) => this.handleChange("password", event.target.value)} />
+        <TextInput
+          name="Correo"
+          value={this.state.email}
+          changeHandler={(event) => this.handleChange("email", event.target.value)}
+        />
+        <PasswordInput
+          name="Contraseña"
+          value={this.state.password}
+          changeHandler={(event) => this.handleChange("password", event.target.value)}
+        />
         <button onClick={this.handleLogin}>Login</button>
       </div>
     );
