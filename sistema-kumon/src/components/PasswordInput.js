@@ -2,9 +2,9 @@ import React from 'react';
 import '../App.css';
 import Input from './Input'
 
-function PasswordInput({name}) {
+function PasswordInput({name, changeHandler}) {
   return (
-    < Input type="password" name={name} />
+    < Input type="password" name={name} changeHandler={changeHandler}/>
   );
 }
 
