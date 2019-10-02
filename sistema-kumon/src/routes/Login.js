@@ -29,7 +29,7 @@ class Login extends React.Component {
 
   handleLogin() {
     console.log(this.state);
-    var url = API_URL + "/auth/login";
+    var url = API_URL + "/users/sign_in";
     const reqBody = {
       email: this.state.email,
       password: this.state.password
