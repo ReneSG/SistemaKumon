@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_212232) do
+ActiveRecord::Schema.define(version: 2019_10_02_224412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_212232) do
     t.string "between_street_b"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id", null: false
+    t.index ["student_id"], name: "index_addresses_on_student_id"
   end
 
   create_table "attendances", force: :cascade do |t|
@@ -42,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_212232) do
     t.string "cellphone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id", null: false
+    t.index ["student_id"], name: "index_emergency_contacts_on_student_id"
   end
 
   create_table "expected_results_interviews", force: :cascade do |t|
@@ -127,10 +131,6 @@ ActiveRecord::Schema.define(version: 2019_09_21_212232) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "school_id", null: false
-    t.bigint "address_id", null: false
-    t.bigint "emergency_contact_id", null: false
-    t.index ["address_id"], name: "index_students_on_address_id"
-    t.index ["emergency_contact_id"], name: "index_students_on_emergency_contact_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
 
@@ -146,13 +146,13 @@ ActiveRecord::Schema.define(version: 2019_09_21_212232) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "students"
   add_foreign_key "attendances", "students"
+  add_foreign_key "emergency_contacts", "students"
   add_foreign_key "expected_results_interviews", "students"
   add_foreign_key "guardians", "students"
   add_foreign_key "hear_about_interviews", "students"
   add_foreign_key "payments", "students"
   add_foreign_key "reason_to_join_interviews", "students"
-  add_foreign_key "students", "addresses"
-  add_foreign_key "students", "emergency_contacts"
   add_foreign_key "students", "schools"
 end
