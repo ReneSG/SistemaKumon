@@ -22,10 +22,10 @@ const handleRegister = function(
     last_name_mother: last_name_mother,
     identifier: identifier,
     date_of_birth: date_of_birth,
-    gender: gender,
+    gender: parseInt(gender, 10),
     phone: phone,
     medical_instructions: medical_instructions,
-    school_attributes: school_attributes,
+    school_id: 1,
     address_attributes: address_attributes,
     emergency_contact_attributes: emergency_contact_attributes,
     guardians_attributes: [
