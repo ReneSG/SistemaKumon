@@ -1,10 +1,12 @@
 import { API_URL } from "../constants/apiurl";
+import { AUTHENTICATED } from "../constants/sessionstorage";
+import axios from "axios";
 
-function handleLogin() {
+const handleLogin = function(email, password) {
   var url = API_URL + "/users/sign_in";
   const reqBody = {
-    email: this.state.email,
-    password: this.state.password
+    email: email,
+    password: password
   };
 
   axios
@@ -27,6 +29,6 @@ function handleLogin() {
     .catch(error => {
       console.log(error);
     });
-}
+};
 
 export { handleLogin };

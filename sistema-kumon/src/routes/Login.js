@@ -1,10 +1,8 @@
 import React from "react";
-import axios from "axios";
 import "../App.css";
 
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
-import { AUTHENTICATED } from "../constants/sessionstorage";
 import { handleLogin } from "../controllers/LoginController";
 
 class Login extends React.Component {
@@ -17,7 +15,7 @@ class Login extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLoginA = this.handleLoginA.bind(this);
   }
 
   handleChange(key, value) {
@@ -25,6 +23,10 @@ class Login extends React.Component {
       ...this.state,
       [key]: value
     });
+  }
+
+  handleLoginA() {
+    handleLogin(this.state.email, this.state.password);
   }
 
   render() {
@@ -45,7 +47,7 @@ class Login extends React.Component {
             this.handleChange("password", event.target.value)
           }
         />
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={this.handleLoginA}>Login</button>
       </div>
     );
   }

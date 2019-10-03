@@ -1,6 +1,7 @@
 import { API_URL } from "../constants/apiurl";
+import axios from "axios";
 
-function handleRegister() {
+const handleRegister = function() {
   var url = API_URL + "/students";
   const reqBody = {
     name: "Rene",
@@ -64,4 +65,6 @@ function handleRegister() {
     .catch(error => {
       console.log(error);
     });
-}
+};
+
+export { handleRegister };
