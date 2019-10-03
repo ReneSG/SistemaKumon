@@ -3,10 +3,9 @@ import { AUTHENTICATED } from "../constants/sessionstorage";
 import axios from "axios";
 
 const handleLogin = function(email, password) {
-  var url = API_URL + "/users/sign_in";
+  var url = API_URL + "/login";
   const reqBody = {
-    email: email,
-    password: password
+    user: { email: "example@gmail.com", password: "password" }
   };
 
   axios
