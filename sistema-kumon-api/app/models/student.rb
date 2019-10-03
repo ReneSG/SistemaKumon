@@ -12,5 +12,5 @@ class Student < ApplicationRecord
   has_one :reason_to_join_interview
   has_one :expected_results_interview
 
-  accepts_nested_attributes_for :address, :emergency_contact
+  accepts_nested_attributes_for :address, :emergency_contact, :guardians
 end
