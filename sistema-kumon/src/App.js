@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Login from './routes/Login'
+import StudentForm from './routes/StudentForm'
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <Login />
+      <StudentForm />
     </div>
   );
 }
