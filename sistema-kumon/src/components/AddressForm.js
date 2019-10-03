@@ -33,7 +33,6 @@ class AddressForm extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(key, value) {
@@ -41,17 +40,13 @@ class AddressForm extends React.Component {
       ...this.state,
       [key]: value,
     });
-  }
-
-  handleSubmit() {
-    console.log(this.state);
+    this.props.handleChange(this.props.stateKey, this.state);
   }
 
   render() {
 
     let inputs = attributes.map(
         ([key, value]) => {
-            console.log(key, value);
             return (
                 <TextInput
                     name={value}
@@ -61,7 +56,6 @@ class AddressForm extends React.Component {
             );
         }
     );
-    console.log(inputs);
     return (
       <div className="Address">
         <header className="Address-header">

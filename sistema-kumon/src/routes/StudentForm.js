@@ -2,6 +2,21 @@ import React from 'react';
 import '../App.css';
 
 import TextInput from '../components/TextInput'
+import AddressForm from '../components/AddressForm'
+import EmergencyContactForm from '../components/EmergencyContactForm'
+import GuardiansForm from '../components/GuardiansForm'
+
+const attributes = [
+  ["name", "Nombre/s"],
+  ["last_name_father", "Apellido paterno"],
+  ["last_name_mother", "Apellido materno"],
+  ["identifier", "Matricula"],
+  ["date_of_birth", "Fecha de nacimiento"],
+  ["gender", "Genero"],
+  ["phone", "Telefono"],
+  ["medical_instructions", "Cuestiones médicas"],
+];
+
 
 class StudentForm extends React.Component {
 
@@ -9,10 +24,17 @@ class StudentForm extends React.Component {
     super(props);
     this.state = {
       "name": "",
-      "lastname_first": "",
-      "lastname_second": "",
-      "school": "",
-      "tutor_name": "",
+      "last_name_father": "",
+      "last_name_mother": "",
+      "identifier": "",
+      "date_of_birth": "",
+      "gender": "",
+      "phone": "",
+      "medical_instructions": "",
+      "school_attributes": {},
+      "address_attributes": {},
+      "emergency_contact_attributes": {},
+      "guardians_attributes": [],
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,36 +53,35 @@ class StudentForm extends React.Component {
   }
 
   render() {
+    let inputs = attributes.map(
+      ([key, value]) => {
+        return (
+          <TextInput
+            name={value}
+            value={this.state[key]}
+            changeHandler={(event) => this.handleChange(key, event.target.value)}
+          />
+        );
+      }
+    );
+
     return (
       <div className="Login">
         <header className="Login-header">
           <h1>Registrar Alumno</h1>
         </header>
-        <TextInput
-          name="Nombre/s"
-          value={this.state.name}
-          changeHandler={(event) => this.handleChange("name", event.target.value)}
+        {inputs}
+        <GuardiansForm 
+          handleChange={this.handleChange}
+          stateKey="guardians_attributes"
         />
-        <TextInput
-          name="Apellido Paterno"
-          value={this.state.lastname_first}
-          changeHandler={(event) => this.handleChange("lastname_first", event.target.value)}
+        <AddressForm
+          handleChange={this.handleChange}
+          stateKey="address_attributes"
         />
-        <TextInput
-          name="Apellido Materno"
-          value={this.state.lastname_second}
-          changeHandler={(event) => this.handleChange("lastname_second", event.target.value)}
-        />
-        <TextInput
-          name="Escuela"
-          value={this.state.school}
-          changeHandler={(event) => this.handleChange("school", event.target.value)}
-        />
-        <h2>Datos del tutor</h2>
-        <TextInput
-          name="Nombre completo"
-          value={this.state.tutor_name}
-          changeHandler={(event) => this.handleChange("tutor_name", event.target.value)}
+        <EmergencyContactForm
+          handleChange={this.handleChange}
+          stateKey="emergency_contact_attributes"
         />
         <button onClick={this.handleSubmit}>Registrar</button>
       </div>
