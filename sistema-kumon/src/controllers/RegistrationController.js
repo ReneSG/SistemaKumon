@@ -1,70 +1,39 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
 
-const handleRegister = function() {
+const handleRegister = function(
+  name,
+  last_name_father,
+  last_name_mother,
+  identifier,
+  date_of_birth,
+  gender,
+  phone,
+  medical_instructions,
+  school_attributes,
+  address_attributes,
+  emergency_contact_attributes,
+  guardians_attributes,
+) {
   var url = API_URL + "/students";
   const reqBody = {
-    name: "Rene",
-    last_name_father: "Garcia",
-    last_name_mother: "Saenz",
-    identifier: "A00818137",
-    date_of_birth: "15/08/1997",
-    gender: 1,
-    phone: "8183669040",
-    medical_instructions: "Tengo asma y me voy a morir alv",
-    school_attributes: {
-      name: "Tec de Monterrey"
-    },
-    address_attributes: {
-      street_name: "Chelsea",
-      ext_num: "244",
-      int_num: "244",
-      neighborhood: "Cumbres de San Agustin",
-      city: "Monterrey",
-      state: "Nuevo Leon",
-      zipcode: "64349",
-      between_street_a: "Calle 1",
-      between_street_b: "Calle 2"
-    },
-    emergency_contact_attributes: {
-      name: "Eduardo Trujillo",
-      phone: "1234342",
-      cellphone: "1223424"
-    },
+    name: name,
+    last_name_father: last_name_father,
+    last_name_mother: last_name_mother,
+    identifier: identifier,
+    date_of_birth: date_of_birth,
+    gender: gender,
+    phone: phone,
+    medical_instructions: medical_instructions,
+    school_attributes: school_attributes,
+    address_attributes: address_attributes,
+    emergency_contact_attributes: emergency_contact_attributes,
     guardians_attributes: [
-      {
-        name: "Eddy bb",
-        last_name_father: "Trujillo",
-        last_name_mother: "Ramos",
-        email: "edybb@gmail.com",
-        phone: "1234456",
-        job: "Robar datos en feisbuk"
-      },
-      {
-        name: "Jime",
-        last_name_father: "Lomelí",
-        last_name_mother: "Cantu",
-        email: "jimme@gmail.com",
-        phone: "1234456",
-        job: "Robarle el cora a Eddy bb ❤"
-      }
+      guardians_attributes
     ]
   };
 
-  axios
-    .post(url, reqBody)
-    .then(response => {
-      var data = response.data;
-      console.log(data);
-      if (data.error) {
-        /* TO-DO: ERROR HANDLING */
-      } else {
-        /* TO-DO: SUCCESS HANDLING */
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  return axios.post(url, reqBody);
 };
 
 export { handleRegister };

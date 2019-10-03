@@ -6,6 +6,8 @@ import AddressForm from '../components/AddressForm'
 import EmergencyContactForm from '../components/EmergencyContactForm'
 import GuardiansForm from '../components/GuardiansForm'
 
+import { handleRegister } from '../controllers/RegistrationController'
+
 const attributes = [
   ["name", "Nombre/s"],
   ["last_name_father", "Apellido paterno"],
@@ -49,7 +51,22 @@ class StudentForm extends React.Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
+    handleRegister(
+      this.state.name,
+      this.state.last_name_father,
+      this.state.last_name_mother,
+      this.state.identifier,
+      this.state.date_of_birth,
+      this.state.gender,
+      this.state.phone,
+      this.state.medical_instructions,
+      this.state.school_attributes,
+      this.state.address_attributes,
+      this.state.emergency_contact_attributes,
+      this.state.guardians_attributes,
+    ).then((response) => {
+      console.log(response);
+    });
   }
 
   render() {
