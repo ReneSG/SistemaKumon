@@ -2,14 +2,18 @@ import { API_URL } from "../constants/apiurl";
 import { AUTHENTICATED } from "../constants/sessionstorage";
 import axios from "axios";
 
-const handleLogin = function(email, password) {
+const handleLogin = function (email, password) {
   var url = API_URL + "/login";
   const reqBody = {
-    user: { email: "example@gmail.com", password: "password" }
+    user: { email, password }
   };
 
   axios
-    .post(url, reqBody)
+    .post(url, reqBody, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
     .then(response => {
       var data = response.data;
       console.log(data);
