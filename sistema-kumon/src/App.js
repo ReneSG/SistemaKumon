@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import './App.css';
 
 import Login from './routes/Login'
@@ -6,23 +8,28 @@ import StudentForm from './routes/StudentForm'
 
 function App() {
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <StudentForm />
-    </div>
+    <Router >
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/login">Iniciar Sesión</Link>
+            </li>
+            <li>
+              <Link to="/students/new">Nuevo Estudiante</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/students/new">
+            <StudentForm />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
