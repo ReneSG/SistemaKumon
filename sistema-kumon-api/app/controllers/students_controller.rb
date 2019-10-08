@@ -38,6 +38,17 @@ class StudentsController < ApplicationController
     @student.destroy
   end
 
+  def mark_attendance
+    @student = Student.find_by(identifier: params[:identifier])
+
+    if @student
+      @student.attendances.create()
+      render json: @student
+    else
+      render status: 404, json: {"errors": "Estudiante no encontrado"}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
