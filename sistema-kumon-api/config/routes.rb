@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :students
-  post '/student/mark_attendance', to: 'students#mark_attendance'
   devise_for :users,
               path: '',
               path_names: {
@@ -11,4 +9,7 @@ Rails.application.routes.draw do
               controllers: {
                 sessions: 'sessions'
               }
+  resources :students
+  get 'student/:student_id/next_payment_date', to: 'students#next_payment_date'
+  post '/student/mark_attendance', to: 'students#mark_attendance'
 end
