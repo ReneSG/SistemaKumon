@@ -34,7 +34,7 @@ class MarkAttendance extends React.Component {
     if (student) {
       this.setState({
         ...this.state,
-        "name": `${student.first_name} ${student.last_name_father} ${student.last_name_mother}`,
+        "name": `${student.name} ${student.last_name_father} ${student.last_name_mother}`,
         "paymentDue": student.next_payment_date,
       });
 
