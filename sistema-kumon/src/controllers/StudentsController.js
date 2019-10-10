@@ -1,7 +1,7 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
 
-const registerStudent = (
+export const registerStudent = (
   name,
   last_name_father,
   last_name_mother,
@@ -33,12 +33,20 @@ const registerStudent = (
     ]
   };
 
-  return axios.post(url, reqBody);
+  return axios.post(url, reqBody).then((respone) => {
+      return true;
+    }).catch((error) => {
+      console.log(error);
+      return false;
+    });
 };
 
-const getStudents = () => {
+export const getStudents = () => {
   let url = API_URL + "/students"
-  return axios.get(url);
+  return axios.get(url).then((response) => {
+    return response.data;
+  }).catch((error) => {
+    console.log(error);
+    return [];
+  });
 };
-
-export { registerStudent, getStudents };
