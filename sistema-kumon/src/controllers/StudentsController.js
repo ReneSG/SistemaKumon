@@ -1,7 +1,7 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
 
-export const registerStudent = (
+export const registerStudent = async (
   name,
   last_name_father,
   last_name_mother,
@@ -33,20 +33,24 @@ export const registerStudent = (
     ]
   };
 
-  return axios.post(url, reqBody).then((respone) => {
-      return true;
-    }).catch((error) => {
-      console.log(error);
-      return false;
-    });
+  try {
+    const respone = await axios.post(url, reqBody);
+    return true;
+  }
+  catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
-export const getStudents = () => {
+export const getStudents = async () => {
   let url = API_URL + "/students"
-  return axios.get(url).then((response) => {
+  try {
+    const response = await axios.get(url);
     return response.data;
-  }).catch((error) => {
+  }
+  catch (error) {
     console.log(error);
     return [];
-  });
+  }
 };
