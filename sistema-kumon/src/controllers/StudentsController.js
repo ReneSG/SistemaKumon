@@ -52,7 +52,7 @@ export const getStudents = async () => {
 };
 
 export const markAttendance = async identifier => {
-  var url = API_URL + "/students/mark_attendance";
+  var url = API_URL + "/student/mark_attendance";
   const reqBody = {
     identifier: identifier
   };
