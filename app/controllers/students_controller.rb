@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :update, :destroy]
+  before_action :set_student, only: [:show, :update, :destroy, :next_payment_date]
 
   # GET /students
   def index
@@ -22,6 +22,10 @@ class StudentsController < ApplicationController
     else
       render json: @student.errors, status: :unprocessable_entity
     end
+  end
+
+  def next_payment_date
+    render json: @student
   end
 
   # PATCH/PUT /students/1
