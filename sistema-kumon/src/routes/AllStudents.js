@@ -5,8 +5,6 @@ import '../App.css';
 import StudentRow from '../components/StudentRow'
 import { getStudents } from '../controllers/StudentsController'
 
-import * as moment from 'moment';
-
 class AllStudents extends React.Component {
 
   constructor(props) {

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'active_support/core_ext'
 class Student < ApplicationRecord
   enum gender: %i[male female]
   has_many :guardians
@@ -15,10 +15,15 @@ class Student < ApplicationRecord
   accepts_nested_attributes_for :address, :emergency_contact, :guardians
 
   def next_payment_date
-    if !self.payments.empty?
-      self.payments.last.created_at + 1.month
+    date = if !self.payments.empty?
+              self.payments.last.created_at + 1.month
+            else
+              self.created_at + 1.month
+            end
+    if date.wday.zero? || date.wday == 6
+      date.next_week.to_date
     else
-      self.created_at + 1.month
+      date.to_date
     end
   end
 end
