@@ -13,7 +13,7 @@ export const registerStudent = async (
   school_attributes,
   address_attributes,
   emergency_contact_attributes,
-  guardians_attributes,
+  guardians_attributes
 ) => {
   var url = API_URL + "/students";
   const reqBody = {
@@ -28,29 +28,40 @@ export const registerStudent = async (
     school_id: 1,
     address_attributes: address_attributes,
     emergency_contact_attributes: emergency_contact_attributes,
-    guardians_attributes: [
-      guardians_attributes
-    ]
+    guardians_attributes: [guardians_attributes]
   };
 
   try {
-    const respone = await axios.post(url, reqBody);
-    return true;
-  }
-  catch (error) {
+    const response = await axios.post(url, reqBody);
+    return response.data;
+  } catch (error) {
     console.log(error);
     return false;
   }
 };
 
 export const getStudents = async () => {
-  let url = API_URL + "/students"
+  let url = API_URL + "/students";
   try {
     const response = await axios.get(url);
     return response.data;
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
     return [];
+  }
+};
+
+export const markAttendance = async identifier => {
+  var url = API_URL + "/students/mark_attendance";
+  const reqBody = {
+    identifier: identifier
+  };
+
+  try {
+    const response = await axios.post(url, reqBody);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 };
