@@ -6,7 +6,7 @@ import AddressForm from '../components/AddressForm'
 import EmergencyContactForm from '../components/EmergencyContactForm'
 import GuardiansForm from '../components/GuardiansForm'
 
-import { handleRegister } from '../controllers/RegistrationController'
+import { registerStudent } from '../controllers/StudentsController'
 
 const attributes = [
   ["name", "Nombre/s"],
@@ -50,8 +50,8 @@ class StudentForm extends React.Component {
     });
   }
 
-  handleSubmit() {
-    handleRegister(
+  async handleSubmit() {
+    let result = await registerStudent(
       this.state.name,
       this.state.last_name_father,
       this.state.last_name_mother,
@@ -64,9 +64,8 @@ class StudentForm extends React.Component {
       this.state.address_attributes,
       this.state.emergency_contact_attributes,
       this.state.guardians_attributes,
-    ).then((response) => {
-      console.log(response);
-    });
+    );
+    console.log(result);
   }
 
   render() {
@@ -74,6 +73,7 @@ class StudentForm extends React.Component {
       ([key, value]) => {
         return (
           <TextInput
+            key={key}
             name={value}
             value={this.state[key]}
             changeHandler={(event) => this.handleChange(key, event.target.value)}
