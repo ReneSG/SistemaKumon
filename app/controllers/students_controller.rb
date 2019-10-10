@@ -1,11 +1,12 @@
 class StudentsController < ApplicationController
+  # before_action :authenticate_user!
   before_action :set_student, only: [:show, :update, :destroy, :next_payment_date]
 
   # GET /students
   def index
     @students = Student.all
 
-    render json: @students
+    render json: @students.to_json(methods: [:next_payment_date])
   end
 
   # GET /students/1
@@ -24,10 +25,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def next_payment_date
-    render json: @student
-  end
-
   # PATCH/PUT /students/1
   def update
     if @student.update(student_params)
@@ -42,6 +39,11 @@ class StudentsController < ApplicationController
     @student.destroy
   end
 
+  def next_payment_date
+    payment_date = @student.next_payment_date
+    render json: { 'next_payment_date' => payment_date }
+  end
+
   def mark_attendance
     @student = Student.find_by(identifier: params[:identifier])
 
@@ -54,16 +56,16 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def student_params
-      params.require(:student).permit(:name, :last_name_father, :last_name_mother, :identifier, :date_of_birth, :gender, :phone, :medical_instructions, :school_id, :address_id, :emergency_contact_id,
-                                     address_attributes: [:id, :street_name, :ext_num, :int_num, :neighborhood, :city, :state, :zipcode, :between_street_a, :between_street_b],
-                                     emergency_contact_attributes: [:id, :name, :phone, :cellphone],
-                                     guardians_attributes: [:id, :name, :last_name_father, :last_name_mother, :email, :phone, :job])
-    end
+  # Only allow a trusted parameter "white list" through.
+  def student_params
+    params.require(:student).permit(:name, :last_name_father, :last_name_mother, :identifier, :date_of_birth, :gender, :phone, :medical_instructions, :school_id, :address_id, :emergency_contact_id,
+                                    address_attributes: [:id, :street_name, :ext_num, :int_num, :neighborhood, :city, :state, :zipcode, :between_street_a, :between_street_b],
+                                    emergency_contact_attributes: [:id, :name, :phone, :cellphone],
+                                    guardians_attributes: [:id, :name, :last_name_father, :last_name_mother, :email, :phone, :job])
+  end
 end
