@@ -24,7 +24,7 @@ function App() {
               <Link to="/students">Lista de alumnos</Link>
             </li>
             <li>
-              <Link to="/students/mark_attendance">Asistencia</Link>
+              <Link to="/student/mark_attendance">Asistencia</Link>
             </li>
           </ul>
         </nav>
@@ -35,7 +35,7 @@ function App() {
           <Route path="/students/new">
             <StudentForm />
           </Route>
-          <Route path="/students/mark_attendance">
+          <Route path="/student/mark_attendance">
             <MarkAttendance />
           </Route>
           <Route path="/students">
