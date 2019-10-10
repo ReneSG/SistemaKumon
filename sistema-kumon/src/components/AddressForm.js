@@ -46,15 +46,16 @@ class AddressForm extends React.Component {
   render() {
 
     let inputs = attributes.map(
-        ([key, value]) => {
-            return (
-                <TextInput
-                    name={value}
-                    value={this.state[key]}
-                    changeHandler={(event) => this.handleChange(key, event.target.value)}
-                />
-            );
-        }
+      ([key, value]) => {
+        return (
+          <TextInput
+              key={key}
+              name={value}
+              value={this.state[key]}
+              changeHandler={(event) => this.handleChange(key, event.target.value)}
+          />
+        );
+      }
     );
     return (
       <div className="Address">
