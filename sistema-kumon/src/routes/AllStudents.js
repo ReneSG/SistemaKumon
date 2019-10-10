@@ -24,7 +24,7 @@ class AllStudents extends React.Component {
       return {
         "identifier": student.identifier,
         "name": `${student.name} ${student.last_name_father} ${student.last_name_mother}`,
-        "paymentDue": "Still not defined",
+        "paymentDue": student.next_payment_date,
       }
     });
 
