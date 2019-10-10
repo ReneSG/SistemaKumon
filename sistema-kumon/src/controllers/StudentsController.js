@@ -1,7 +1,7 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
 
-const handleRegister = function(
+const registerStudent = (
   name,
   last_name_father,
   last_name_mother,
@@ -14,7 +14,7 @@ const handleRegister = function(
   address_attributes,
   emergency_contact_attributes,
   guardians_attributes,
-) {
+) => {
   var url = API_URL + "/students";
   const reqBody = {
     name: name,
@@ -36,4 +36,9 @@ const handleRegister = function(
   return axios.post(url, reqBody);
 };
 
-export { handleRegister };
+const getStudents = () => {
+  let url = API_URL + "/students"
+  return axios.get(url);
+};
+
+export { registerStudent, getStudents };
