@@ -38,7 +38,7 @@ function App() {
           <Route path="/students">
             <AllStudents />
           </Route>
-          <Route path="/students/mark_attendnace">
+          <Route path="/students/mark_attendance">
             <MarkAttendance />
           </Route>
         </Switch>
