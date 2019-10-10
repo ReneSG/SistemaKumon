@@ -1,7 +1,7 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
 
-const handleRegister = function(
+export const registerStudent = async (
   name,
   last_name_father,
   last_name_mother,
@@ -14,7 +14,7 @@ const handleRegister = function(
   address_attributes,
   emergency_contact_attributes,
   guardians_attributes,
-) {
+) => {
   var url = API_URL + "/students";
   const reqBody = {
     name: name,
@@ -33,7 +33,24 @@ const handleRegister = function(
     ]
   };
 
-  return axios.post(url, reqBody);
+  try {
+    const respone = await axios.post(url, reqBody);
+    return true;
+  }
+  catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
-export { handleRegister };
+export const getStudents = async () => {
+  let url = API_URL + "/students"
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  }
+  catch (error) {
+    console.log(error);
+    return [];
+  }
+};

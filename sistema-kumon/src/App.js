@@ -5,6 +5,7 @@ import './App.css';
 
 import Login from './routes/Login'
 import StudentForm from './routes/StudentForm'
+import AllStudents from './routes/AllStudents'
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
               <Link to="/login">Iniciar Sesión</Link>
             </li>
             <li>
-              <Link to="/students/new">Nuevo Estudiante</Link>
+              <Link to="/students/new">Nuevo alumno</Link>
+            </li>
+            <li>
+              <Link to="/students/">Lista de alumnos</Link>
             </li>
           </ul>
         </nav>
@@ -26,6 +30,9 @@ function App() {
           </Route>
           <Route path="/students/new">
             <StudentForm />
+          </Route>
+          <Route path="/students/">
+            <AllStudents />
           </Route>
         </Switch>
       </div>
