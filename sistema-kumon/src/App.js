@@ -35,11 +35,11 @@ function App() {
           <Route path="/students/new">
             <StudentForm />
           </Route>
-          <Route path="/students">
-            <AllStudents />
-          </Route>
           <Route path="/students/mark_attendance">
             <MarkAttendance />
+          </Route>
+          <Route path="/students">
+            <AllStudents />
           </Route>
         </Switch>
       </div>
