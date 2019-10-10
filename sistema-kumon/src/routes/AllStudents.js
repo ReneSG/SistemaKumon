@@ -5,6 +5,8 @@ import '../App.css';
 import StudentRow from '../components/StudentRow'
 import { getStudents } from '../controllers/StudentsController'
 
+import * as moment from 'moment';
+
 class AllStudents extends React.Component {
 
   constructor(props) {
@@ -28,7 +30,7 @@ class AllStudents extends React.Component {
       }
     });
 
-    this.setState({"students": newState});
+    this.setState({ "students": newState });
   }
 
   render() {
@@ -36,6 +38,7 @@ class AllStudents extends React.Component {
       (student) => {
         return (
           <StudentRow
+            key={student.identifier}
             identifier={student.identifier}
             name={student.name}
             paymentDue={student.paymentDue}
