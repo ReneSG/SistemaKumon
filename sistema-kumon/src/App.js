@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 import "./App.css";
 
@@ -7,6 +7,7 @@ import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
 import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
+import { AUTHENTICATED } from './constants/sessionstorage';
 
 function App() {
   return (
@@ -32,18 +33,39 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/students/new">
+          <PrivateRoute path="/students/new">
             <StudentForm />
-          </Route>
-          <Route path="/student/mark_attendance">
+          </PrivateRoute>
+          <PrivateRoute path="/student/mark_attendance">
             <MarkAttendance />
-          </Route>
-          <Route path="/students">
+          </PrivateRoute>
+          <PrivateRoute exact path="/students/">
             <AllStudents />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </div>
     </Router>
+  );
+}
+
+function PrivateRoute({ children, ...rest }) {
+  const isAuthenticated = sessionStorage.getItem(AUTHENTICATED);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAuthenticated ? (
+          children
+        ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+      }
+    />
   );
 }
 

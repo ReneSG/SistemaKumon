@@ -1,3 +1,4 @@
 const AUTHENTICATED = "isAuthenticated";
+const TOKEN = "token"
 
-export { AUTHENTICATED };
+export { AUTHENTICATED, TOKEN };
