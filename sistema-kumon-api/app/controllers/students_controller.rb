@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1
   def show
-    render json: @student
+    render json: @student.to_json(include: [:address, :guardians, :emergency_contact])
   end
 
   # POST /students
@@ -36,6 +36,17 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   def destroy
     @student.destroy
+  end
+
+  def mark_attendance
+    @student = Student.find_by(identifier: params[:identifier])
+
+    if @student
+      @student.attendances.create()
+      render json: @student
+    else
+      render status: 404, json: {"errors": "Estudiante no encontrado"}
+    end
   end
 
   private
