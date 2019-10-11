@@ -7,7 +7,7 @@ import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
 import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
-import { AUTHENTICATED } from './constants/sessionstorage';
+import { AUTHENTICATED, TOKEN } from './constants/sessionstorage';
 
 function App() {
   const logout = () => {
