@@ -10,6 +10,11 @@ import MarkAttendance from "./routes/MarkAttendance";
 import { AUTHENTICATED } from './constants/sessionstorage';
 
 function App() {
+  const logout = () => {
+    sessionStorage.removeItem(AUTHENTICATED);
+    sessionStorage.removeItem(TOKEN)
+  }
+
   return (
     <Router>
       <div className="App">
@@ -26,6 +31,9 @@ function App() {
             </li>
             <li>
               <Link to="/student/mark_attendance">Asistencia</Link>
+            </li>
+            <li>
+              <button onClick={logout}>Logout</button>
             </li>
           </ul>
         </nav>
