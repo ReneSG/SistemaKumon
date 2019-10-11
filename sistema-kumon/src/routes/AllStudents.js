@@ -28,7 +28,7 @@ class AllStudents extends React.Component {
       }
     });
 
-    this.setState({"students": newState});
+    this.setState({ "students": newState });
   }
 
   render() {
@@ -36,6 +36,7 @@ class AllStudents extends React.Component {
       (student) => {
         return (
           <StudentRow
+            key={student.identifier}
             identifier={student.identifier}
             name={student.name}
             paymentDue={student.paymentDue}
