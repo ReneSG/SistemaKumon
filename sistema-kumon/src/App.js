@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
-import Login from './routes/Login'
-import StudentForm from './routes/StudentForm'
-import AllStudents from './routes/AllStudents'
+import Login from "./routes/Login";
+import StudentForm from "./routes/StudentForm";
+import AllStudents from "./routes/AllStudents";
+import MarkAttendance from "./routes/MarkAttendance";
 
 function App() {
   return (
-    <Router >
+    <Router>
       <div className="App">
         <nav>
           <ul>
@@ -20,7 +21,10 @@ function App() {
               <Link to="/students/new">Nuevo alumno</Link>
             </li>
             <li>
-              <Link to="/students/">Lista de alumnos</Link>
+              <Link to="/students">Lista de alumnos</Link>
+            </li>
+            <li>
+              <Link to="/student/mark_attendance">Asistencia</Link>
             </li>
           </ul>
         </nav>
@@ -31,7 +35,10 @@ function App() {
           <Route path="/students/new">
             <StudentForm />
           </Route>
-          <Route path="/students/">
+          <Route path="/student/mark_attendance">
+            <MarkAttendance />
+          </Route>
+          <Route path="/students">
             <AllStudents />
           </Route>
         </Switch>

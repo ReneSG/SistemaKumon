@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
 
     if @student
       @student.attendances.create()
-      render json: @student
+      render json: @student.attributes.merge("next_payment_date" => @student.next_payment_date)
     else
       render status: 404, json: {"errors": "Estudiante no encontrado"}
     end
