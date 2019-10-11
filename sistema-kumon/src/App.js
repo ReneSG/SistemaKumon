@@ -7,6 +7,7 @@ import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
 import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
+import PrivateRoute from "./components/PrivateRoute";
 import { AUTHENTICATED, TOKEN } from './constants/sessionstorage';
 
 function App() {
@@ -56,25 +57,5 @@ function App() {
   );
 }
 
-function PrivateRoute({ children, ...rest }) {
-  const isAuthenticated = sessionStorage.getItem(AUTHENTICATED);
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        isAuthenticated ? (
-          children
-        ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location }
-              }}
-            />
-          )
-      }
-    />
-  );
-}
 
 export default App;
