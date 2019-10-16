@@ -44,7 +44,7 @@ class NormalLoginForm extends React.Component {
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Correo"
-                  changeHandler={event =>
+                  onChange={event =>
                     this.handleChange("email", event.target.value)
                   }
                 />,
@@ -58,7 +58,7 @@ class NormalLoginForm extends React.Component {
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   type="password"
                   placeholder="Contraseña"
-                  changeHandler={event =>
+                  onChange={event =>
                     this.handleChange("password", event.target.value)
                   }
                 />,
