@@ -1,11 +1,11 @@
 import React from "react";
 import "../App.css";
 
-import TextInput from "../components/TextInput";
-import PasswordInput from "../components/PasswordInput";
 import { handleLogin } from "../controllers/LoginController";
 
-class Login extends React.Component {
+import { Form, Icon, Input, Button } from 'antd';
+
+class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,27 +30,54 @@ class Login extends React.Component {
   }
 
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="Login">
-        <header className="Login-header">
-          <h1>Login</h1>
-        </header>
-        <TextInput
-          name="Correo"
-          changeHandler={event =>
-            this.handleChange("email", event.target.value)
-          }
-        />
-        <PasswordInput
-          name="Contraseña"
-          changeHandler={event =>
-            this.handleChange("password", event.target.value)
-          }
-        />
-        <button onClick={this.handleLoginA}>Login</button>
-      </div>
+      <div className="backgroundLogin">
+        <div className="login-container">
+          <div className="logo"><img alt="Logo" style={{ width: '60%' }} className={'logo'} src={process.env.PUBLIC_URL + '/logo.png'} /></div>
+          <span className='login-name'>Sistema de Administración de Alumnos Kumon</span>
+          <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form.Item>
+              {getFieldDecorator('username', {
+                rules: [{ required: true, message: 'Por favor ingresa tu correo!' }],
+              })(
+                <Input
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="Correo"
+                  changeHandler={event =>
+                    this.handleChange("email", event.target.value)
+                  }
+                />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('password', {
+                rules: [{ required: true, message: 'Por favor ingresa tu contraseña!' }],
+              })(
+                <Input
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  type="password"
+                  placeholder="Contraseña"
+                  changeHandler={event =>
+                    this.handleChange("password", event.target.value)
+                  }
+                />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button onClick={this.handleLoginA} type="primary" htmlType="submit" className="login-form-button">
+                Iniciar sesión
+          </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      </ div>
+
     );
   }
 }
 
-export default Login;
+
+const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+
+export default WrappedNormalLoginForm;

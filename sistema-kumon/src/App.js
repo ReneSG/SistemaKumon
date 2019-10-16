@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
-import "./App.css";
 import 'antd/dist/antd.css';
+import "./App.css";
 
 import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
@@ -13,15 +13,13 @@ import { AUTHENTICATED, TOKEN } from './constants/sessionstorage';
 import AppLayout from './components/AppLayout';
 
 function App() {
-  const logout = () => {
-    sessionStorage.removeItem(AUTHENTICATED);
-    sessionStorage.removeItem(TOKEN)
-  }
-
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route exact path="/">
+            {sessionStorage.getItem(TOKEN) ? <Redirect to='/student' /> : <Redirect to="login" />}
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
