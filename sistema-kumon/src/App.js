@@ -31,12 +31,12 @@ function App() {
             </AppLayout>
           </PrivateRoute>
           <PrivateRoute path="/student/mark_attendance">
-            <AppLayout>
+            <AppLayout view="1">
               <MarkAttendance />
             </AppLayout>
           </PrivateRoute>
           <PrivateRoute exact path="/students/">
-            <AppLayout>
+            <AppLayout view="0">
               <AllStudents />
             </AppLayout>
           </PrivateRoute>

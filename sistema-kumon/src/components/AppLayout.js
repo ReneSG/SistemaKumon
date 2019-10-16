@@ -36,16 +36,16 @@ export default class AppLayout extends Component {
 
           <div className="logo"><img alt="Logo" style={{ width: '70%' }} className={'logo'} src={'https://www.freelogovectors.net/svg04/kumon-logo.svg'} /></div>
 
-          <Menu theme="light" className={'ant-menu-kumon'} mode="inline" defaultSelectedKeys={[this.props.view || 0]}>
-            <Menu.Item key="1">
+          <Menu theme="light" className={'ant-menu-kumon'} mode="inline" defaultSelectedKeys={[this.props.view || "0"]}>
+            <Menu.Item key="0">
               <Link to={"/students"}><Icon type="team" />
                 <span className="nav-text">Alumnos</span></Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="1">
               <Link to={"/student/mark_attendance"}><Icon type="solution" />
                 <span className="nav-text">Asistencia</span></Link>
             </Menu.Item>
-            <Menu.Item key="3" onClick={(e) => { this.logout(); }}>
+            <Menu.Item key="2" onClick={(e) => { this.logout(); }}>
               <Icon type="logout" />
               <span>Salir</span>
             </Menu.Item>
