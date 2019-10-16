@@ -55,7 +55,7 @@ export default class AppLayout extends Component {
         </Sider>
 
         <Layout>
-          <Header style={{ 'backgroundColor': '#ffff' }} className={'primaryBackground header-bar'}>
+          <Header className={'primaryBackground header-bar'}>
             <span className={'logoName'}>Sistema de Administración de Alumnos Kumon</span>
             <span className={'logoName'} style={{ float: 'right' }} ><Icon type={'user'} /> {sessionStorage.getItem(EMAIL)}</span>
           </Header>
