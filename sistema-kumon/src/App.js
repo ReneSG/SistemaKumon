@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 import "./App.css";
+import 'antd/dist/antd.css';
 
 import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
@@ -9,6 +10,7 @@ import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
 import PrivateRoute from "./components/PrivateRoute";
 import { AUTHENTICATED, TOKEN } from './constants/sessionstorage';
+import AppLayout from './components/AppLayout';
 
 function App() {
   const logout = () => {
@@ -19,37 +21,24 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/login">Iniciar Sesión</Link>
-            </li>
-            <li>
-              <Link to="/students/new">Nuevo alumno</Link>
-            </li>
-            <li>
-              <Link to="/students">Lista de alumnos</Link>
-            </li>
-            <li>
-              <Link to="/student/mark_attendance">Asistencia</Link>
-            </li>
-            <li>
-              <button onClick={logout}>Logout</button>
-            </li>
-          </ul>
-        </nav>
         <Switch>
           <Route path="/login">
             <Login />
           </Route>
           <PrivateRoute path="/students/new">
-            <StudentForm />
+            <AppLayout>
+              <StudentForm />
+            </AppLayout>
           </PrivateRoute>
           <PrivateRoute path="/student/mark_attendance">
-            <MarkAttendance />
+            <AppLayout view="1">
+              <MarkAttendance />
+            </AppLayout>
           </PrivateRoute>
           <PrivateRoute exact path="/students/">
-            <AllStudents />
+            <AppLayout view="0">
+              <AllStudents />
+            </AppLayout>
           </PrivateRoute>
         </Switch>
       </div>

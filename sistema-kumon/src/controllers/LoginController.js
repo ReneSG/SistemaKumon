@@ -1,5 +1,5 @@
 import { API_URL } from "../constants/apiurl";
-import { AUTHENTICATED, TOKEN } from "../constants/sessionstorage";
+import { AUTHENTICATED, TOKEN, EMAIL } from "../constants/sessionstorage";
 import axios from "axios";
 
 const handleLogin = function (email, password) {
@@ -22,9 +22,12 @@ const handleLogin = function (email, password) {
         /* TO-DO: ERROR HANDLING */
       } else {
         console.log(response)
-        const token = response.headers.authorization.split(' ')[1]
+        const token = response.headers.authorization.split(' ')[1];
+        const email = data.email;
         sessionStorage.setItem(AUTHENTICATED, true);
-        sessionStorage.setItem(TOKEN, token)
+        sessionStorage.setItem(TOKEN, token);
+        sessionStorage.setItem(EMAIL, email);
+        window.location.href = "/students";
       }
     })
     .catch(error => {
