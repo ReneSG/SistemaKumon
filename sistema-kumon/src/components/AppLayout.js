@@ -11,7 +11,6 @@ export default class AppLayout extends Component {
 
   constructor(props) {
     super(props);
-    // Don't call this.setState() here!
     this.state = {
     }
   }
@@ -29,7 +28,7 @@ export default class AppLayout extends Component {
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={(broken) => { console.log(broken); }}
-          className={'ant-menu-tec'}
+          className={'ant-menu-kumon'}
           onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
           style={{ minHeight: '100vh' }}
           theme="light"
@@ -37,7 +36,7 @@ export default class AppLayout extends Component {
 
           <div className="logo"><img alt="Logo" style={{ width: '70%' }} className={'logo'} src={'https://www.freelogovectors.net/svg04/kumon-logo.svg'} /></div>
 
-          <Menu theme="light" className={'ant-menu-tec'} mode="inline" defaultSelectedKeys={[this.props.view || 0]}>
+          <Menu theme="light" className={'ant-menu-kumon'} mode="inline" defaultSelectedKeys={[this.props.view || 0]}>
             <Menu.Item key="1">
               <Link to={"/students"}><Icon type="team" />
                 <span className="nav-text">Alumnos</span></Link>
