@@ -1,109 +1,139 @@
 import React from 'react';
 import '../App.css';
 
+import { Button, Form } from 'antd'
+
 import TextInput from '../components/TextInput'
+import DateInput from '../components/DateInput'
+import TextAreaInput from '../components/TextAreaInput'
 import AddressForm from '../components/AddressForm'
 import EmergencyContactForm from '../components/EmergencyContactForm'
 import GuardiansForm from '../components/GuardiansForm'
+import SchoolSelector from '../components/SchoolSelector'
 
 import { registerStudent } from '../controllers/StudentsController'
 
 const attributes = [
-  ["name", "Nombre/s"],
-  ["last_name_father", "Apellido paterno"],
-  ["last_name_mother", "Apellido materno"],
-  ["identifier", "Matricula"],
-  ["date_of_birth", "Fecha de nacimiento"],
-  ["gender", "Genero"],
-  ["phone", "Telefono"],
-  ["medical_instructions", "Cuestiones médicas"],
+  ["name", "Nombre/s", TextInput],
+  ["last_name_father", "Apellido paterno", TextInput],
+  ["last_name_mother", "Apellido materno", TextInput],
+  ["identifier", "Matricula", TextInput],
+  ["date_of_birth", "Fecha de nacimiento", DateInput],
+  ["gender", "Genero", TextInput],
+  ["phone", "Telefono", TextInput],
+  ["medical_instructions", "Cuestiones médicas", TextAreaInput],
 ];
 
 
-class StudentForm extends React.Component {
+class StudentFormComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      "name": "",
-      "last_name_father": "",
-      "last_name_mother": "",
-      "identifier": "",
-      "date_of_birth": "",
-      "gender": "",
-      "phone": "",
-      "medical_instructions": "",
-      "school_attributes": {},
-      "address_attributes": {},
-      "emergency_contact_attributes": {},
-      "guardians_attributes": [],
-    }
-
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(key, value) {
-    this.setState({
-      ...this.state,
-      [key]: value,
+  async handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.form.validateFieldsAndScroll(async (err, values) => {
+      if (true) {
+        let result = await registerStudent(
+          values.name,
+          values.last_name_father,
+          values.last_name_mother,
+          values.identifier,
+          values.date_of_birth,
+          values.gender,
+          values.phone,
+          values.medical_instructions,
+          values.school_attributes,
+          {
+            "street_name": values.address_street_name,
+            "ext_num": values.address_ext_num,
+            "int_num": values.address_int_num,
+            "neighborhood": values.address_neighborhood,
+            "city": values.address_city,
+            "state": values.address_state,
+            "zipcode": values.address_zipcode,
+            "between_street_a": values.address_between_street_a,
+            "between_street_b": values.address_between_street_b,
+          },
+          {
+            "name": values.emergency_contact_name,
+            "phone": values.emergency_contact_phone,
+            "cellphone": values.emergency_contact_cellphone,
+          },
+          {
+            "name": values.guardians_name,
+            "last_name_father": values.guardians_last_name_father,
+            "last_name_mother": values.guardians_last_name_mother,
+            "email": values.guardians_email,
+            "phone": values.guardians_phone,
+            "job": values.guardians_job,
+          }
+        );
+      }
     });
   }
 
-  async handleSubmit() {
-    let result = await registerStudent(
-      this.state.name,
-      this.state.last_name_father,
-      this.state.last_name_mother,
-      this.state.identifier,
-      this.state.date_of_birth,
-      this.state.gender,
-      this.state.phone,
-      this.state.medical_instructions,
-      this.state.school_attributes,
-      this.state.address_attributes,
-      this.state.emergency_contact_attributes,
-      this.state.guardians_attributes,
-    );
-    console.log(result);
-  }
-
   render() {
+    const { getFieldDecorator } = this.props.form;
+
     let inputs = attributes.map(
-      ([key, value]) => {
+      ([key, value, Tag]) => {
         return (
-          <TextInput
+          <Tag
             key={key}
+            fieldKey={key}
             name={value}
-            value={this.state[key]}
-            changeHandler={(event) => this.handleChange(key, event.target.value)}
+            value={this.props[key]}
+            getFieldDecorator={getFieldDecorator}
           />
         );
       }
     );
+
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    };
 
     return (
       <div className="Login">
         <header className="Login-header">
           <h1>Registrar Alumno</h1>
         </header>
-        {inputs}
-        <GuardiansForm 
-          handleChange={this.handleChange}
-          stateKey="guardians_attributes"
-        />
-        <AddressForm
-          handleChange={this.handleChange}
-          stateKey="address_attributes"
-        />
-        <EmergencyContactForm
-          handleChange={this.handleChange}
-          stateKey="emergency_contact_attributes"
-        />
-        <button onClick={this.handleSubmit}>Registrar</button>
+        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+          {inputs}
+          <SchoolSelector 
+            formKey="school_selector"
+            getFieldDecorator={getFieldDecorator}
+          />
+          <GuardiansForm 
+            formKey="guardians_attributes"
+            getFieldDecorator={getFieldDecorator}
+          />
+          <AddressForm
+            formKey="address_attributes"
+            getFieldDecorator={getFieldDecorator}
+          />
+          <EmergencyContactForm
+            formKey="emergency_contact_attributes"
+            getFieldDecorator={getFieldDecorator}
+          />
+          <Button htmlType="submit">Registrar</Button>
+        </Form>
       </div>
     );
   }
 }
 
+
+const StudentForm = Form.create({name: 'student-form'})(StudentFormComponent);
 export default StudentForm;
