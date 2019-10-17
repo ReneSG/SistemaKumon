@@ -10,6 +10,7 @@ Rails.application.routes.draw do
                 sessions: 'sessions'
               }
   resources :students
+  resources :schools
   get 'student/:student_id/next_payment_date', to: 'students#next_payment_date'
   post '/student/mark_attendance', to: 'students#mark_attendance'
 end
