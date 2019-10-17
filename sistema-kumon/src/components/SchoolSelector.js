@@ -4,13 +4,10 @@ import '../App.css';
 import TextInput from '../components/TextInput'
 
 const attributes = [
-    ["emergency_contact_name", "Nombre", TextInput],
-    ["emergency_contact_phone", "Telefono", TextInput],
-    ["emergency_contact_cellphone", "Celular", TextInput],
+    ["school_name", "Nombre/s", TextInput],
 ];
 
-
-class EmergencyContactForm extends React.Component {
+class SchoolSelector extends React.Component {
   render() {
     let inputs = attributes.map(
       ([key, value, Tag]) => {
@@ -28,7 +25,7 @@ class EmergencyContactForm extends React.Component {
     return (
       <div className="Address">
         <header className="Address-header">
-          <h2>Contacto de Emergencia</h2>
+          <h2>Escuela</h2>
         </header>
         {inputs}
       </div>
@@ -36,4 +33,4 @@ class EmergencyContactForm extends React.Component {
   }
 }
 
-export default EmergencyContactForm;
+export default SchoolSelector;

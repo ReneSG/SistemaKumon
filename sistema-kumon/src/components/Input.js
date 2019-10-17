@@ -1,13 +1,19 @@
 import React from 'react';
 import '../App.css';
 
-function Input({type, name, value, changeHandler}) {
+import { Form } from 'antd';
+
+function FormInput({name, value, changeHandler, children}) {
   return (
-    <div className="TextInput">
-      <label htmlFor={name}>{name}</label>
-      <input id={name} type={type} value={value} onChange={changeHandler}></input>
-    </div>
+    <Form.Item label={name}>
+      {children}
+    </Form.Item>
   );
 }
 
-export default Input;
+// <div className="TextInput">
+//   <label htmlFor={name}>{name}</label>
+//   <input id={name} type={type} value={value} onChange={changeHandler}></input>
+// </div>
+
+export default FormInput;

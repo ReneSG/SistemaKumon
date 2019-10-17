@@ -3,7 +3,9 @@ import '../App.css';
 import FormInput from './Input'
 import { Input } from 'antd';
 
-function TextInput({fieldKey, name, value, getFieldDecorator}) {
+const { TextArea } = Input;
+
+function TextAreaInput({fieldKey, name, value, getFieldDecorator}) {
   return (
     <FormInput name={name}>
       {getFieldDecorator(fieldKey, {
@@ -14,9 +16,9 @@ function TextInput({fieldKey, name, value, getFieldDecorator}) {
           }
         ],
         initialValue: value
-      })(<Input />)}
+      })(<TextArea rows={4} />)}
     </FormInput>
   );
 }
 
-export default TextInput;
+export default TextAreaInput;

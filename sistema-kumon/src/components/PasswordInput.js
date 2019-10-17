@@ -1,10 +1,13 @@
 import React from 'react';
 import '../App.css';
-import Input from './Input'
+import FormInput from './Input'
+import { Input } from 'antd';
 
 function PasswordInput({name, value, changeHandler}) {
   return (
-    < Input type="password" name={name} value={value} changeHandler={changeHandler}/>
+    < FormInput name={name} value={value} changeHandler={changeHandler}>
+      <Input.Password />
+    </FormInput>
   );
 }
 
