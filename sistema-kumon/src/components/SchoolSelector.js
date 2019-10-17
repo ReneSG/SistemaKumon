@@ -1,33 +1,38 @@
 import React from 'react';
 import '../App.css';
 
-import TextInput from '../components/TextInput'
-
-const attributes = [
-    ["school_name", "Nombre/s", TextInput],
-];
+import { AutoComplete, Form, Input } from 'antd';
 
 class SchoolSelector extends React.Component {
   render() {
-    let inputs = attributes.map(
-      ([key, value, Tag]) => {
-        return (
-          <Tag
-            key={key}
-            fieldKey={key}
-            name={value}
-            value={this.props[key]}
-            getFieldDecorator={this.props.getFieldDecorator}
-          />
-        );
-      }
-    );
+    const schools = this.props.schools.map(({name, id}) => {
+      return name;
+    });
     return (
-      <div className="Address">
-        <header className="Address-header">
+      <div className="School">
+        <header className="School-header">
           <h2>Escuela</h2>
         </header>
-        {inputs}
+        <Form.Item label="Nombre">
+          {this.props.getFieldDecorator(this.props.formKey, {
+            rules: [
+              {
+                required: true,
+                message: `El campo "Escuela" es obligatorio!`,
+              }
+            ],
+            initialValue: this.props.school
+          })(
+            <AutoComplete
+              dataSource={schools}
+              filterOption={(inputValue, option) =>
+                option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+              }
+            >
+              <Input />
+            </AutoComplete>
+          )}
+        </Form.Item>
       </div>
     );
   }
