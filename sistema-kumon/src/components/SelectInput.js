@@ -8,7 +8,7 @@ const { Option } = Select;
 function SelectInput({fieldKey, name, value, getFieldDecorator, options}) {
   let selectOptions = options.map(option => {
     return (
-      <Option value={option}>{option}</Option>
+      <Option key={option} value={option}>{option}</Option>
     );
   });
 

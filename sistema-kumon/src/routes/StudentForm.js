@@ -48,7 +48,19 @@ class StudentFormComponent extends React.Component {
     e.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
-      if (true) {
+      if (!err) {
+        let selected_school = this.state.schools.filter( school => school.name === values.school_selector );
+        console.log(selected_school);
+
+        let school_object = {
+          "name": values.school_selector
+        };
+        if (selected_school.length > 0) {
+          school_object = {
+            "id": selected_school[0].id
+          };
+        }
+
         let result = await registerStudent(
           values.name,
           values.last_name_father,
@@ -58,7 +70,7 @@ class StudentFormComponent extends React.Component {
           values.gender,
           values.phone,
           values.medical_instructions,
-          values.school_attributes,
+          school_object,
           {
             "street_name": values.address_street_name,
             "ext_num": values.address_ext_num,
