@@ -1,5 +1,39 @@
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.backgroundLogin { 
+  background-color: #001529;
+  height: 100%; 
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background-color: #ffffff;
+  width: 50%;
+  height: 50;
+  padding: 2%;
+  border-radius: 10px;
+}
+
+.login-name {
+  color: #001529;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ant-form {
+  margin-top: 20px;
 }
 
 .App-logo {
