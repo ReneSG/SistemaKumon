@@ -1,5 +1,6 @@
 import { API_URL } from "../constants/apiurl";
 import axios from "axios";
+import { TOKEN } from "../constants/sessionstorage";
 
 export const registerStudent = async (
   name,
@@ -31,8 +32,12 @@ export const registerStudent = async (
     guardians_attributes: [guardians_attributes]
   };
 
+  const headers = {
+    'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
+  }
+
   try {
-    const response = await axios.post(url, reqBody);
+    const response = await axios.post(url, { headers }, reqBody);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -43,7 +48,10 @@ export const registerStudent = async (
 export const getStudents = async () => {
   let url = API_URL + "/students";
   try {
-    const response = await axios.get(url);
+    const headers = {
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
+    }
+    const response = await axios.get(url, { headers });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -58,7 +66,10 @@ export const markAttendance = async identifier => {
   };
 
   try {
-    const response = await axios.post(url, reqBody);
+    const headers = {
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
+    }
+    const response = await axios.post(url, { headers }, reqBody);
     return response.data;
   } catch (error) {
     console.log(error);
