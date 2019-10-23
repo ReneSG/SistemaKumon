@@ -1,23 +1,24 @@
 class StudentsController < ApplicationController
-  # before_action :authenticate_user!
-  before_action :set_student, only: [:show, :update, :destroy, :next_payment_date]
+  before_action :authenticate_user!
+  before_action :set_student, only: [:show, :update, :destroy, :next_payment_date, :mark_attendance]
 
   # GET /students
   def index
+    authorize Student
     @students = Student.all
-
     render json: @students.to_json(methods: [:next_payment_date])
   end
 
   # GET /students/1
   def show
+    authorize @student
     render json: @student.to_json(include: [:address, :guardians, :emergency_contact])
   end
 
   # POST /students
   def create
     @student = Student.new(student_params)
-
+    authorize @student
     if @student.save
       render json: @student, status: :created, location: @student
     else
@@ -27,6 +28,7 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1
   def update
+    authorize @student
     if @student.update(student_params)
       render json: @student
     else
@@ -36,6 +38,7 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1
   def destroy
+    authorize @student
     @student.destroy
   end
 
@@ -46,7 +49,7 @@ class StudentsController < ApplicationController
 
   def mark_attendance
     @student = Student.find_by(identifier: params[:identifier])
-
+    authorize Student
     if @student
       @student.attendances.create()
       render json: @student.attributes.merge("next_payment_date" => @student.next_payment_date)
