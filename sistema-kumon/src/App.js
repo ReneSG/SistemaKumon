@@ -17,9 +17,6 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/">
-            {sessionStorage.getItem(TOKEN) ? <Redirect to='/student' /> : <Redirect to="login" />}
-          </Route>
           <Route path="/login">
             <Login />
           </Route>
@@ -38,6 +35,9 @@ function App() {
               <AllStudents />
             </AppLayout>
           </PrivateRoute>
+          <Route path="/">
+            {sessionStorage.getItem(TOKEN) ? <Redirect to='/students' /> : <Redirect to="login" />}
+          </Route>
         </Switch>
       </div>
     </Router>
