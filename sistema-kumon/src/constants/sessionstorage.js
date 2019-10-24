@@ -1,5 +1,6 @@
 const AUTHENTICATED = "isAuthenticated";
 const TOKEN = "token"
 const EMAIL = "email"
+const ADMIN = "admin";
 
-export { AUTHENTICATED, TOKEN, EMAIL };
+export { AUTHENTICATED, ADMIN, TOKEN, EMAIL };

@@ -1,9 +1,12 @@
 import React from "react";
+import { Redirect } from 'react-router-dom'
+
 import "../App.css";
 
 import { handleLogin } from "../controllers/LoginController";
 
 import { Form, Icon, Input, Button } from 'antd';
+import { AUTHENTICATED } from "../constants/sessionstorage";
 
 class NormalLoginForm extends React.Component {
   constructor(props) {
@@ -30,6 +33,12 @@ class NormalLoginForm extends React.Component {
   }
 
   render() {
+    if (sessionStorage.getItem(AUTHENTICATED) === 'true') {
+      return (
+        <Redirect to="student/mark_attendance" />
+      )
+    }
+
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="backgroundLogin">

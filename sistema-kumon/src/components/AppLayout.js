@@ -3,7 +3,7 @@ import {
   Layout, Menu, Icon
 } from 'antd';
 import { Link } from 'react-router-dom'
-import { EMAIL, TOKEN, AUTHENTICATED } from "../constants/sessionstorage";
+import { EMAIL, TOKEN, AUTHENTICATED, ADMIN } from "../constants/sessionstorage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -18,10 +18,13 @@ export default class AppLayout extends Component {
   logout = () => {
     sessionStorage.removeItem(AUTHENTICATED);
     sessionStorage.removeItem(TOKEN);
+    sessionStorage.removeItem(ADMIN);
     window.location.href = "/login";
   }
 
   Basic = () => {
+    const is_admin = sessionStorage.getItem(ADMIN) === "true";
+
     return (
       <Layout className={'layout'}>
         <Sider
@@ -37,10 +40,10 @@ export default class AppLayout extends Component {
           <div className="logo"><img alt="Logo" style={{ width: '70%' }} className={'logo'} src={'https://www.freelogovectors.net/svg04/kumon-logo.svg'} /></div>
 
           <Menu theme="light" className={'ant-menu-kumon'} mode="inline" defaultSelectedKeys={[this.props.view || "0"]}>
-            <Menu.Item key="0">
+            {is_admin && <Menu.Item key="0">
               <Link to={"/students"}><Icon type="team" />
                 <span className="nav-text">Alumnos</span></Link>
-            </Menu.Item>
+            </Menu.Item>}
             <Menu.Item key="1">
               <Link to={"/student/mark_attendance"}><Icon type="solution" />
                 <span className="nav-text">Asistencia</span></Link>

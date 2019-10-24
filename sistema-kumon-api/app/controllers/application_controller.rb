@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
   respond_to :json
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def render_resource(resource)
     if resource.errors.empty?
@@ -20,6 +22,19 @@ class ApplicationController < ActionController::API
         }
       ]
     }, status: :bad_request
+  end
+
+  def user_not_authorized
+    render json: {
+      errors: [
+        {
+          status: '401',
+          title: 'Unauthorized',
+          detail: "No tienes permiso para realizar esta acción",
+          code: '100'
+        }
+      ]
+    }, status: :unauthorized
   end
 end
 
