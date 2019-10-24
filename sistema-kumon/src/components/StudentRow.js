@@ -10,10 +10,12 @@ function StudentRow({ studentId, identifier, name, paymentDue, index }) {
     return "studentRow" + (index % 2 === 0 ? " evenRow" : "oddRow");
   };
 
+
+
   return (
     <div className={getRowClass(index)}>
       <p>
-        <Link to={`students/${studentId}`}>{name}</Link>
+        <Link to={`/students/${studentId}`}>{name}</Link>
       </p>
       <p>{identifier}</p>
       <span>Proximo pago: </span>

@@ -25,6 +25,10 @@ export default class AppLayout extends Component {
   Basic = () => {
     const is_admin = sessionStorage.getItem(ADMIN) === "true";
 
+    const childrenWithProps = React.Children.map(this.props.children, child => 
+      React.cloneElement(child, {...this.props})
+    );
+
     return (
       <Layout className={'layout'}>
         <Sider
@@ -64,7 +68,7 @@ export default class AppLayout extends Component {
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               <Content style={{ padding: '0', height: '100%' }}>
-                {this.props.children}
+                {childrenWithProps} 
               </Content>
             </div>
           </Content>

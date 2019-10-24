@@ -6,6 +6,7 @@ import "./App.css";
 
 import Login from "./routes/Login";
 import StudentForm from "./routes/StudentForm";
+import StudentInfo from "./routes/StudentInfo";
 import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
 import PrivateRoute from "./components/PrivateRoute";
@@ -23,6 +24,11 @@ function App() {
           <PrivateRoute admin path="/students/new">
             <AppLayout>
               <StudentForm />
+            </AppLayout>
+          </PrivateRoute>
+          <PrivateRoute admin path="/students/:studentId">
+            <AppLayout>
+              <StudentInfo />
             </AppLayout>
           </PrivateRoute>
           <PrivateRoute admin={false} path="/student/mark_attendance">

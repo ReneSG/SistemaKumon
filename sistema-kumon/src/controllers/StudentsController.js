@@ -76,3 +76,17 @@ export const markAttendance = async identifier => {
     return false;
   }
 };
+
+export const getStudent = async id => {
+  let url = API_URL + "/students/" + id;
+  try {
+    const headers = {
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
+    }
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch(error) {
+    console.log(error);
+    return {};
+  }
+}
