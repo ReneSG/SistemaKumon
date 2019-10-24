@@ -37,7 +37,7 @@ export const registerStudent = async (
   };
 
   try {
-    const response = await axios.post(url, reqBody, { headers });
+    const response = await axios.post(url, { headers }, reqBody);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -83,7 +83,8 @@ export const payMonth = async identifier => {
     const headers = {
       Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
     };
-    const response = await axios.post(url, { headers }, reqBody);
+    console.log(reqBody);
+    const response = await axios.post(url, reqBody, { headers: headers });
     return response.data;
   } catch (error) {
     console.log(error);
