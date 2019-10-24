@@ -3,11 +3,15 @@ import '../App.css';
 import FormInput from './Input'
 import { Input } from 'antd';
 
-function TextInput({fieldKey, name, value, getFieldDecorator}) {
+function EmailInput({fieldKey, name, value, getFieldDecorator}) {
   return (
     <FormInput name={name}>
       {getFieldDecorator(fieldKey, {
         rules: [
+          {
+            type: 'email',
+            message: 'Correo inválido!',
+          },
           {
             required: true,
             message: `El campo "${name}" es obligatorio!`,
@@ -19,4 +23,4 @@ function TextInput({fieldKey, name, value, getFieldDecorator}) {
   );
 }
 
-export default TextInput;
+export default EmailInput;

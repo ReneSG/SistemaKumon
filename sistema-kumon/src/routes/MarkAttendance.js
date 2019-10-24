@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 
-import TextInput from "../components/TextInput";
+import { Button, Icon, Input } from 'antd';
 import { markAttendance } from "../controllers/StudentsController";
 import StudentRow from "../components/StudentRow";
 
@@ -65,13 +65,21 @@ class MarkAttendance extends React.Component {
       title = "Asistencia";
       display = (
         <div>
-          <TextInput
-            name="Matricula"
-            changeHandler={event =>
+          <Input
+            style={{"margin": "15px"}}
+            size="large"
+            placeholder="Matricula"
+            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            onChange={event =>
               this.handleChange("identifier", event.target.value)
             }
           />
-          <button onClick={this.handleSubmit}>Marcar Asistencia</button>
+          <Button
+            size="large"
+            onClick={this.handleSubmit}
+          >
+            Marcar Asistencia
+          </Button>
         </div>
       );
     }

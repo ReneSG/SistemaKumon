@@ -2,57 +2,67 @@ import React from 'react';
 import '../App.css';
 
 import TextInput from '../components/TextInput'
+import SelectInput from '../components/SelectInput'
+
+const MexicoStates = [
+  "Aguascaliente",
+  "Baja California", 
+  "Baja California Sur",
+  "Campeche",
+  "Chiapas",
+  "Chihuahua",
+  "Coahuila de Zaragoza",
+  "Colima",
+  "Durango",
+  "Estado de México",
+  "Guanajuato",
+  "Guerrero",
+  "Hidalgo",
+  "Jalisco",
+  "Michoacán de Ocampo",
+  "Morelos",
+  "Nayarit",
+  "Nuevo León",
+  "Oaxaca",
+  "Puebla",
+  "Querétaro",
+  "Quintana Roo",
+  "San Luis Potosí",
+  "Sinaloa",
+  "Sonora",
+  "Tabasco",
+  "Tamaulipas",
+  "Tlaxcala",
+  "Veracruz de Ignacio de la Llave",
+  "Yucatán",
+  "Zacatecas"
+]
 
 const attributes = [
-    ["street_name", "Calle"],
-    ["ext_num", "Número exterior"],
-    ["int_num", "Número interior"],
-    ["neighborhood", "Colonia"],
-    ["city", "Ciudad"],
-    ["state", "Estado"],
-    ["zipcode", "Código postal"],
-    ["between_street_a", "Entre calles 1"],
-    ["between_street_b", "Entre calles 2"],
+    ["address_street_name", "Calle", TextInput, {}],
+    ["address_ext_num", "Número exterior", TextInput, {}],
+    ["address_int_num", "Número interior", TextInput, {}],
+    ["address_neighborhood", "Colonia", TextInput, {}],
+    ["address_city", "Ciudad", TextInput, {}],
+    ["address_state", "Estado", SelectInput, {"options": MexicoStates}],
+    ["address_zipcode", "Código postal", TextInput, {}],
+    ["address_between_street_a", "Entre calles 1", TextInput, {}],
+    ["address_between_street_b", "Entre calles 2", TextInput, {}],
 ];
 
 
 class AddressForm extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      "street_name": "",
-      "ext_num": "",
-      "int_num": "",
-      "neighborhood": "",
-      "city": "",
-      "state": "",
-      "zipcode": "",
-      "between_street_a": "",
-      "between_street_b": "",
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(key, value) {
-    this.setState({
-      ...this.state,
-      [key]: value,
-    });
-    this.props.handleChange(this.props.stateKey, this.state);
-  }
-
   render() {
-
     let inputs = attributes.map(
-      ([key, value]) => {
+      ([key, value, Tag, extraArgs]) => {
         return (
-          <TextInput
-              key={key}
-              name={value}
-              value={this.state[key]}
-              changeHandler={(event) => this.handleChange(key, event.target.value)}
+          <Tag
+            key={key}
+            fieldKey={key}
+            name={value}
+            value={this.props[key]}
+            getFieldDecorator={this.props.getFieldDecorator}
+            {...extraArgs}
           />
         );
       }

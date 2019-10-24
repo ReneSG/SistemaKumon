@@ -1,9 +1,11 @@
 import React from 'react';
 import '../App.css';
 import FormInput from './Input'
-import { Input } from 'antd';
+import { Select } from 'antd';
 
-function TextInput({fieldKey, name, value, getFieldDecorator}) {
+const { Option } = Select;
+
+function GenderInput({fieldKey, name, value, getFieldDecorator}) {
   return (
     <FormInput name={name}>
       {getFieldDecorator(fieldKey, {
@@ -14,9 +16,14 @@ function TextInput({fieldKey, name, value, getFieldDecorator}) {
           }
         ],
         initialValue: value
-      })(<Input />)}
+      })(
+        <Select>
+          <Option value={0}>Masculino</Option>
+          <Option value={1}>Femenino</Option>
+        </Select>
+      )}
     </FormInput>
   );
 }
 
-export default TextInput;
+export default GenderInput;
