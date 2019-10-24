@@ -15,7 +15,8 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   def create
-    @payment = Payment.new(payment_params)
+    @student = Student.find_by(identifier: params[:student_id])
+    @payment = @student.payments.new(payment_params)
 
     if @payment.save
       PaymentMailer.payment_confirmation(@payment.student).deliver
