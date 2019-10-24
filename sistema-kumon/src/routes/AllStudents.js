@@ -36,6 +36,7 @@ class AllStudents extends React.Component {
       return (
         <StudentRow
           key={student.identifier}
+          studentId={student.id}
           identifier={student.identifier}
           name={student.name}
           paymentDue={student.paymentDue}

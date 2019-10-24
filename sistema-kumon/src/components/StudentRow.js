@@ -3,8 +3,9 @@ import "../App.css";
 import Moment from "react-moment";
 import { DATE_FORMAT } from "../constants/dateFormat";
 import "moment/locale/es";
+import { Link } from "react-router-dom";
 
-function StudentRow({ identifier, name, paymentDue, index }) {
+function StudentRow({ studentId, identifier, name, paymentDue, index }) {
   const getRowClass = index => {
     return "studentRow" + (index % 2 === 0 ? " evenRow" : "oddRow");
   };
@@ -12,7 +13,7 @@ function StudentRow({ identifier, name, paymentDue, index }) {
   return (
     <div className={getRowClass(index)}>
       <p>
-        <b>{name}</b>
+        <Link to={`students/${studentId}`}>{name}</Link>
       </p>
       <p>{identifier}</p>
       <span>Proximo pago: </span>
