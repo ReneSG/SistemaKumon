@@ -18,6 +18,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
 
     if @payment.save
+      PaymentMailer.payment_confirmation(@payment.student).deliver
       render json: @payment, status: :created, location: @payment
     else
       render json: @payment.errors, status: :unprocessable_entity
@@ -46,6 +47,6 @@ class PaymentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def payment_params
-      params.fetch(:payment, {})
+      params.require(:payment).permit(:student_id)
     end
 end
