@@ -37,7 +37,7 @@ export const registerStudent = async (
   }
 
   try {
-    const response = await axios.post(url, { headers }, reqBody);
+    const response = await axios.post(url, reqBody, { headers });
     return response.data;
   } catch (error) {
     console.log(error);

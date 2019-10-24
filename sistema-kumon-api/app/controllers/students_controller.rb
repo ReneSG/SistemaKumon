@@ -17,8 +17,8 @@ class StudentsController < ApplicationController
 
   # POST /students
   def create
+    authorize Student
     @student = Student.new(student_params)
-    authorize @student
     if @student.save
       render json: @student, status: :created, location: @student
     else
