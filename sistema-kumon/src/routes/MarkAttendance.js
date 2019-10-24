@@ -1,22 +1,21 @@
 import React from "react";
 import "../App.css";
 
-import { Button, Icon, Input } from 'antd';
+import { Button, Icon, Input } from "antd";
 import { markAttendance } from "../controllers/StudentsController";
 import StudentRow from "../components/StudentRow";
 
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
+const sleep = milliseconds => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
 class MarkAttendance extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      "identifier": "",
-      "name": null,
-      "paymentDue": null,
+      identifier: "",
+      name: null,
+      paymentDue: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,18 +33,17 @@ class MarkAttendance extends React.Component {
     if (student) {
       this.setState({
         ...this.state,
-        "name": `${student.name} ${student.last_name_father} ${student.last_name_mother}`,
-        "paymentDue": student.next_payment_date,
+        name: `${student.name} ${student.last_name_father} ${student.last_name_mother}`,
+        paymentDue: student.next_payment_date
       });
 
       await sleep(5000);
 
       this.setState({
-        "identifier": "",
-        "name": null,
-        "paymentDue": null,
+        identifier: "",
+        name: null,
+        paymentDue: null
       });
-
     }
   }
 
@@ -66,18 +64,15 @@ class MarkAttendance extends React.Component {
       display = (
         <div>
           <Input
-            style={{"margin": "15px"}}
+            style={{ margin: "15px" }}
             size="large"
             placeholder="Matricula"
-            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
             onChange={event =>
               this.handleChange("identifier", event.target.value)
             }
           />
-          <Button
-            size="large"
-            onClick={this.handleSubmit}
-          >
+          <Button size="large" onClick={this.handleSubmit}>
             Marcar Asistencia
           </Button>
         </div>
