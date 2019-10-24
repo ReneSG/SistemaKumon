@@ -1,12 +1,7 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 import "./App.css";
 
 import Login from "./routes/Login";
@@ -14,9 +9,8 @@ import StudentForm from "./routes/StudentForm";
 import AllStudents from "./routes/AllStudents";
 import MarkAttendance from "./routes/MarkAttendance";
 import PrivateRoute from "./components/PrivateRoute";
-import { TOKEN } from "./constants/sessionstorage";
-import AppLayout from "./components/AppLayout";
-import StudentPayments from "./routes/StudentPayments";
+import { TOKEN } from './constants/sessionstorage';
+import AppLayout from './components/AppLayout';
 
 function App() {
   return (
@@ -41,22 +35,14 @@ function App() {
               <AllStudents />
             </AppLayout>
           </PrivateRoute>
-          <PrivateRoute admin path="/student/payments">
-            <AppLayout>
-              <StudentPayments />
-            </AppLayout>
-          </PrivateRoute>
           <Route path="/">
-            {sessionStorage.getItem(TOKEN) ? (
-              <Redirect to="/students" />
-            ) : (
-              <Redirect to="login" />
-            )}
+            {sessionStorage.getItem(TOKEN) ? <Redirect to='/students' /> : <Redirect to="login" />}
           </Route>
         </Switch>
       </div>
     </Router>
   );
 }
+
 
 export default App;
