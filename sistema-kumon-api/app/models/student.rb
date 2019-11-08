@@ -16,7 +16,7 @@ class Student < ApplicationRecord
   accepts_nested_attributes_for :address, :emergency_contact, :guardians
 
   def set_next_payment_date
-    self.set_next_payment_date = self.created_at + 1.month
+    self.next_payment_date = self.created_at + 1.month
     self.save
   end
 end
