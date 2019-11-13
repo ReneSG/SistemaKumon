@@ -33,8 +33,8 @@ export const registerStudent = async (
   };
 
   const headers = {
-    'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
-  }
+    Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+  };
 
   try {
     const response = await axios.post(url, reqBody, { headers });
@@ -49,13 +49,46 @@ export const getStudents = async () => {
   let url = API_URL + "/students";
   try {
     const headers = {
-      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
-    }
+      Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+    };
     const response = await axios.get(url, { headers });
     return response.data;
   } catch (error) {
     console.log(error);
     return [];
+  }
+};
+
+export const getNextPayment = async identifier => {
+  let url = API_URL + "/student/" + identifier + "/next_payment_date";
+  try {
+    const headers = {
+      Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+    };
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const payMonth = async identifier => {
+  var url = API_URL + "/payments";
+  const reqBody = {
+    student_id: identifier
+  };
+
+  try {
+    const headers = {
+      Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+    };
+    console.log(reqBody);
+    const response = await axios.post(url, reqBody, { headers: headers });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 };
 
@@ -67,9 +100,9 @@ export const markAttendance = async identifier => {
 
   try {
     const headers = {
-      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN)
-    }
-    const response = await axios.post(url, { headers }, reqBody);
+      Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+    };
+    const response = await axios.post(url, reqBody, { headers });
     return response.data;
   } catch (error) {
     console.log(error);

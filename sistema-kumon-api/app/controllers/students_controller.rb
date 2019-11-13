@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: [:show, :update, :destroy, :next_payment_date, :mark_attendance]
+  before_action :set_student, only: [:show, :update, :destroy, :mark_attendance]
 
   # GET /students
   def index
@@ -43,6 +43,7 @@ class StudentsController < ApplicationController
   end
 
   def next_payment_date
+    @student = Student.find_by(identifier: params[:student_id])
     payment_date = @student.next_payment_date
     render json: { 'next_payment_date' => payment_date }
   end

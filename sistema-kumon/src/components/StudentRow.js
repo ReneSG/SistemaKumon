@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function StudentRow({ studentId, identifier, name, paymentDue, index }) {
   const getRowClass = index => {
-    return "studentRow" + (index % 2 === 0 ? " evenRow" : "oddRow");
+    return "studentRow" + (index % 2 === 0 ? " evenRow" : " oddRow");
   };
 
 
