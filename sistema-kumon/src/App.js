@@ -34,7 +34,7 @@ function RouterSwitch() {
         </Route>
         <PrivateRoute admin path="/students/new">
           <AppLayout>
-            <StudentForm />
+            <StudentForm purpose="Registrar estudiante"/>
           </AppLayout>
         </PrivateRoute>
         <PrivateRoute admin path="/editStudent">

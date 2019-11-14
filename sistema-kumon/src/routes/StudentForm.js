@@ -50,7 +50,6 @@ class StudentFormComponent extends React.Component {
         let selected_school = this.state.schools.filter(
           school => school.name === values.school_selector
         );
-        console.log(selected_school);
 
         let school_object = {
           name: values.school_selector
@@ -61,7 +60,21 @@ class StudentFormComponent extends React.Component {
           };
         }
 
+        let guardian_id = {}, address_id = {}, ec_id = {};
+        if (this.props.guardian) {
+          guardian_id = { id: this.props.guardian.id };
+        }
+
+        if (this.props.address) {
+          address_id = { id: this.props.address.id };
+        }
+
+        if (this.props.emergency_contact) {
+          ec_id = { id: this.props.emergency_contact.id };
+        }
+
         let response = await registerStudent(
+          this.props.id,
           values.name,
           values.last_name_father,
           values.last_name_mother,
@@ -72,6 +85,7 @@ class StudentFormComponent extends React.Component {
           values.medical_instructions,
           school_object,
           {
+            ...address_id,
             street_name: values.address_street_name,
             ext_num: values.address_ext_num,
             int_num: values.address_int_num,
@@ -83,12 +97,14 @@ class StudentFormComponent extends React.Component {
             between_street_b: values.address_between_street_b
           },
           {
+            ...ec_id,
             name: values.emergency_contact_name,
             phone: values.emergency_contact_phone,
             cellphone: values.emergency_contact_cellphone
           },
           {
-            name: values.guardians_name,
+            ...guardian_id,
+            name: values.guardian_name,
             last_name_father: values.guardian_last_name_father,
             last_name_mother: values.guardian_last_name_mother,
             email: values.guardian_email,
@@ -98,9 +114,9 @@ class StudentFormComponent extends React.Component {
         );
         if (response) {
           notification.success({
-            message: 'Error al registrar el estudiante!',
+            message: 'Éxito!',
             description:
-              'Favor de revisar que la matricula no sea repetida.',
+              'El estudiante se ha guardado correctamente.',
           });
         } else {
           notification.error({
@@ -143,13 +159,14 @@ class StudentFormComponent extends React.Component {
     return (
       <div className="Login">
         <header className="Login-header">
-          <h1>Registrar Alumno</h1>
+          <h1>{this.props.purpose}</h1>
         </header>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           {inputs}
           <SchoolSelector
             formKey="school_selector"
             schools={this.state.schools}
+            school={this.props.school_name}
             getFieldDecorator={getFieldDecorator}
           />
           <GuardiansForm

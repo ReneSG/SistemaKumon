@@ -3,6 +3,7 @@ import axios from "axios";
 import { TOKEN } from "../constants/sessionstorage";
 
 export const registerStudent = async (
+  id,
   name,
   last_name_father,
   last_name_mother,
@@ -17,7 +18,7 @@ export const registerStudent = async (
   guardians_attributes
 ) => {
   var url = API_URL + "/students";
-  const reqBody = {
+  let reqBody = {
     name: name,
     last_name_father: last_name_father,
     last_name_mother: last_name_mother,
@@ -26,18 +27,27 @@ export const registerStudent = async (
     gender: parseInt(gender, 10),
     phone: phone,
     medical_instructions: medical_instructions,
-    ...school_attributes,
+    school_attributes: school_attributes,
     address_attributes: address_attributes,
     emergency_contact_attributes: emergency_contact_attributes,
     guardians_attributes: [guardians_attributes]
   };
+
+  let method = "post";
+
+  if (id) {
+    url = url + `/${id}`;
+    method = "put";
+  }
+
+  console.log(reqBody);
 
   const headers = {
     Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
   };
 
   try {
-    const response = await axios.post(url, reqBody, { headers });
+    const response = await axios({url: url, method: method, data: reqBody, headers: { ...headers }});
     return response.data;
   } catch (error) {
     console.log(error);

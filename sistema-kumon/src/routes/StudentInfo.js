@@ -9,7 +9,6 @@ import StudentForm from "./StudentForm";
 class StudentInfo extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.state = {
       studentId: this.props.studentId,
@@ -21,6 +20,8 @@ class StudentInfo extends React.Component {
     let student = await getStudent(this.state.studentId);
     if(student) {
       student.guardian = student.guardians[0];
+      student.gender = student.gender === "male" ? 0 : 1;
+      student.school_name = student.school.name;
     } else {
       notification.error({
         message: 'Estudiante no encontrado!',
@@ -32,9 +33,9 @@ class StudentInfo extends React.Component {
   }
 
   render() {
-    console.log(this.state.student);
     return (
-      <StudentForm 
+      <StudentForm
+        purpose="Editar estudiante"
         {...this.state.student}
       />
     );
