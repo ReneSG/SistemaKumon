@@ -19,6 +19,8 @@ class StudentsController < ApplicationController
   def create
     authorize Student
     @student = Student.new(student_params)
+    @school = maybe_update_or_create_school
+    @student.school_id = @school.id
     if @student.save
       render json: @student, status: :created, location: @student
     else
@@ -29,6 +31,8 @@ class StudentsController < ApplicationController
   # PATCH/PUT /students/1
   def update
     authorize @student
+    @school = maybe_update_or_create_school
+    @student.school_id = @school.id
     if @student.update(student_params)
       render json: @student
     else
@@ -63,6 +67,10 @@ class StudentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def maybe_update_or_create_school
+    return params[:school_attributes].key?(:id) ? School.find(params[:school_attributes][:id]) : School.create(name: params[:school_attributes][:name])
   end
 
   # Only allow a trusted parameter "white list" through.
