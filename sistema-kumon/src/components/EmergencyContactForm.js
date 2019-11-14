@@ -4,22 +4,22 @@ import '../App.css';
 import TextInput from '../components/TextInput'
 
 const attributes = [
-    ["emergency_contact_name", "Nombre", TextInput],
-    ["emergency_contact_phone", "Telefono", TextInput],
-    ["emergency_contact_cellphone", "Celular", TextInput],
+    ["name", "emergency_contact_name", "Nombre", TextInput],
+    ["phone", "emergency_contact_phone", "Telefono", TextInput],
+    ["cellphone", "emergency_contact_cellphone", "Celular", TextInput],
 ];
 
 
 class EmergencyContactForm extends React.Component {
   render() {
     let inputs = attributes.map(
-      ([key, value, Tag]) => {
+      ([prop_key, key, value, Tag]) => {
         return (
           <Tag
             key={key}
             fieldKey={key}
             name={value}
-            value={this.props[key]}
+            value={this.props[prop_key]}
             getFieldDecorator={this.props.getFieldDecorator}
           />
         );

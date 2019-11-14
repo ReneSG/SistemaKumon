@@ -39,28 +39,28 @@ const MexicoStates = [
 ]
 
 const attributes = [
-    ["address_street_name", "Calle", TextInput, {}],
-    ["address_ext_num", "Número exterior", TextInput, {}],
-    ["address_int_num", "Número interior", TextInput, {}],
-    ["address_neighborhood", "Colonia", TextInput, {}],
-    ["address_city", "Ciudad", TextInput, {}],
-    ["address_state", "Estado", SelectInput, {"options": MexicoStates}],
-    ["address_zipcode", "Código postal", TextInput, {}],
-    ["address_between_street_a", "Entre calles 1", TextInput, {}],
-    ["address_between_street_b", "Entre calles 2", TextInput, {}],
+    ["street_name", "address_street_name", "Calle", TextInput, {}],
+    ["ext_num", "address_ext_num", "Número exterior", TextInput, {}],
+    ["int_num", "address_int_num", "Número interior", TextInput, {}],
+    ["neighborhood", "address_neighborhood", "Colonia", TextInput, {}],
+    ["city", "address_city", "Ciudad", TextInput, {}],
+    ["state", "address_state", "Estado", SelectInput, {"options": MexicoStates}],
+    ["zipcode", "address_zipcode", "Código postal", TextInput, {}],
+    ["between_street_a", "address_between_street_a", "Entre calles 1", TextInput, {}],
+    ["between_street_a", "address_between_street_b", "Entre calles 2", TextInput, {}],
 ];
 
 
 class AddressForm extends React.Component {
   render() {
     let inputs = attributes.map(
-      ([key, value, Tag, extraArgs]) => {
+      ([prop_key, key, value, Tag, extraArgs]) => {
         return (
           <Tag
             key={key}
             fieldKey={key}
             name={value}
-            value={this.props[key]}
+            value={this.props[prop_key]}
             getFieldDecorator={this.props.getFieldDecorator}
             {...extraArgs}
           />

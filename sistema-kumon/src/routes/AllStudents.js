@@ -22,6 +22,7 @@ class AllStudents extends React.Component {
     const students = await getStudents();
     let newState = students.map(student => {
       return {
+        id: student.id,
         identifier: student.identifier,
         name: `${student.name} ${student.last_name_father} ${student.last_name_mother}`,
         paymentDue: student.next_payment_date
@@ -36,6 +37,7 @@ class AllStudents extends React.Component {
       return (
         <StudentRow
           key={student.identifier}
+          studentId={student.id}
           identifier={student.identifier}
           name={student.name}
           paymentDue={student.paymentDue}

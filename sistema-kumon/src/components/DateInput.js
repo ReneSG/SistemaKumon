@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 import '../App.css';
 import FormInput from './Input'
 import { DatePicker } from 'antd';
@@ -13,7 +15,7 @@ function DateInput({fieldKey, name, value, getFieldDecorator}) {
             message: `El campo "${name}" es obligatorio!`,
           }
         ],
-        initialValue: value
+        initialValue: moment(value)
       })(<DatePicker />)}
     </FormInput>
   );

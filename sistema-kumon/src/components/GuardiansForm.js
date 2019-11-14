@@ -5,12 +5,12 @@ import TextInput from '../components/TextInput'
 import EmailInput from '../components/EmailInput'
 
 const attributes = [
-    ["guardian_name", "Nombre/s", TextInput],
-    ["guardian_last_name_father", "Apellido paterno", TextInput],
-    ["guardian_last_name_mother", "Apellido materno", TextInput],
-    ["guardian_email", "Correo", EmailInput],
-    ["guardian_phone", "Telefono", TextInput],
-    ["guardian_job", "Trabajo", TextInput],
+    ["name", "guardian_name", "Nombre/s", TextInput],
+    ["last_name_father", "guardian_last_name_father", "Apellido paterno", TextInput],
+    ["last_name_mother", "guardian_last_name_mother", "Apellido materno", TextInput],
+    ["email", "guardian_email", "Correo", EmailInput],
+    ["phone", "guardian_phone", "Telefono", TextInput],
+    ["job", "guardian_job", "Trabajo", TextInput],
 ];
 
 
@@ -18,13 +18,13 @@ class GuardiansForm extends React.Component {
   render() {
 
     let inputs = attributes.map(
-      ([key, value, Tag]) => {
+      ([prop_key, key, value, Tag]) => {
         return (
           <Tag
             key={key}
             fieldKey={key}
             name={value}
-            value={this.props[key]}
+            value={this.props[prop_key]}
             getFieldDecorator={this.props.getFieldDecorator}
           />
         );
