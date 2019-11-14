@@ -26,10 +26,6 @@ export default class AppLayout extends Component {
   Basic = () => {
     const is_admin = sessionStorage.getItem(ADMIN) === "true";
 
-    const childrenWithProps = React.Children.map(this.props.children, child => 
-      React.cloneElement(child, {...this.props})
-    );
-
     return (
       <Layout className={"layout"}>
         <Sider

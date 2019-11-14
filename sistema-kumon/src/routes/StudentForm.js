@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 
-import { Button, Form } from "antd";
+import { Button, Form, notification } from "antd";
 
 import TextInput from "../components/TextInput";
 import DateInput from "../components/DateInput";
@@ -61,7 +61,7 @@ class StudentFormComponent extends React.Component {
           };
         }
 
-        await registerStudent(
+        let response = await registerStudent(
           values.name,
           values.last_name_father,
           values.last_name_mother,
@@ -89,13 +89,27 @@ class StudentFormComponent extends React.Component {
           },
           {
             name: values.guardians_name,
-            last_name_father: values.guardians_last_name_father,
-            last_name_mother: values.guardians_last_name_mother,
-            email: values.guardians_email,
-            phone: values.guardians_phone,
-            job: values.guardians_job
+            last_name_father: values.guardian_last_name_father,
+            last_name_mother: values.guardian_last_name_mother,
+            email: values.guardian_email,
+            phone: values.guardian_phone,
+            job: values.guardian_job
           }
         );
+        if (response) {
+          notification.success({
+            message: 'Error al registrar el estudiante!',
+            description:
+              'Favor de revisar que la matricula no sea repetida.',
+          });
+        } else {
+          notification.error({
+            message: 'Error al registrar el estudiante!',
+            description:
+              'Favor de revisar que la matricula no sea repetida.',
+          });
+        }
+        
       }
     });
   }
@@ -141,14 +155,17 @@ class StudentFormComponent extends React.Component {
           <GuardiansForm
             formKey="guardians_attributes"
             getFieldDecorator={getFieldDecorator}
+            {...this.props.guardian}
           />
           <AddressForm
             formKey="address_attributes"
             getFieldDecorator={getFieldDecorator}
+            {...this.props.address}
           />
           <EmergencyContactForm
             formKey="emergency_contact_attributes"
             getFieldDecorator={getFieldDecorator}
+            {...this.props.emergency_contact}
           />
           <Button htmlType="submit">Registrar</Button>
         </Form>

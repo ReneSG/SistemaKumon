@@ -15,7 +15,7 @@ function StudentRow({ studentId, identifier, name, paymentDue, index }) {
   return (
     <div className={getRowClass(index)}>
       <p>
-        <Link to={`/students/${studentId}`}>{name}</Link>
+        <Link to={`/editStudent?studentId=${studentId}`}>{name}</Link>
       </p>
       <p>{identifier}</p>
       <span>Proximo pago: </span>

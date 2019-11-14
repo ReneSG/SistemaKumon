@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  useLocation
 } from "react-router-dom";
 
 import "antd/dist/antd.css";
@@ -19,48 +20,59 @@ import { TOKEN } from "./constants/sessionstorage";
 import AppLayout from "./components/AppLayout";
 import StudentPayments from "./routes/StudentPayments";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+function RouterSwitch() {
+  let query = useQuery();
+  return (
+    <div className="App">
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <PrivateRoute admin path="/students/new">
+          <AppLayout>
+            <StudentForm />
+          </AppLayout>
+        </PrivateRoute>
+        <PrivateRoute admin path="/editStudent">
+          <AppLayout>
+            <StudentInfo studentId={query.get("studentId")}/>
+          </AppLayout>
+        </PrivateRoute>
+        <PrivateRoute admin={false} path="/student/mark_attendance">
+          <AppLayout view="1">
+            <MarkAttendance />
+          </AppLayout>
+        </PrivateRoute>
+        <PrivateRoute admin exact path="/students/">
+          <AppLayout view="0">
+            <AllStudents />
+          </AppLayout>
+        </PrivateRoute>
+        <PrivateRoute admin path="/student/payments">
+          <AppLayout>
+            <StudentPayments />
+          </AppLayout>
+        </PrivateRoute>
+        <Route path="/">
+          {sessionStorage.getItem(TOKEN) ? (
+            <Redirect to="/students" />
+          ) : (
+            <Redirect to="login" />
+          )}
+        </Route>
+      </Switch>
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <PrivateRoute admin path="/students/new">
-            <AppLayout>
-              <StudentForm />
-            </AppLayout>
-          </PrivateRoute>
-          <PrivateRoute admin path="/students/:studentId">
-            <AppLayout>
-              <StudentInfo />
-            </AppLayout>
-          </PrivateRoute>
-          <PrivateRoute admin={false} path="/student/mark_attendance">
-            <AppLayout view="1">
-              <MarkAttendance />
-            </AppLayout>
-          </PrivateRoute>
-          <PrivateRoute admin exact path="/students/">
-            <AppLayout view="0">
-              <AllStudents />
-            </AppLayout>
-          </PrivateRoute>
-          <PrivateRoute admin path="/student/payments">
-            <AppLayout>
-              <StudentPayments />
-            </AppLayout>
-          </PrivateRoute>
-          <Route path="/">
-            {sessionStorage.getItem(TOKEN) ? (
-              <Redirect to="/students" />
-            ) : (
-              <Redirect to="login" />
-            )}
-          </Route>
-        </Switch>
-      </div>
+      <RouterSwitch />
     </Router>
   );
 }

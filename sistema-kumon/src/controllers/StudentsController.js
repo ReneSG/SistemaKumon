@@ -26,7 +26,7 @@ export const registerStudent = async (
     gender: parseInt(gender, 10),
     phone: phone,
     medical_instructions: medical_instructions,
-    school_id: 1,
+    ...school_attributes,
     address_attributes: address_attributes,
     emergency_contact_attributes: emergency_contact_attributes,
     guardians_attributes: [guardians_attributes]
@@ -105,7 +105,6 @@ export const markAttendance = async identifier => {
     const response = await axios.post(url, reqBody, { headers });
     return response.data;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
@@ -120,6 +119,6 @@ export const getStudent = async id => {
     return response.data;
   } catch(error) {
     console.log(error);
-    return {};
+    return false;
   }
 }
