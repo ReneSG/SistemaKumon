@@ -11,6 +11,7 @@ class StudentPayments extends React.Component {
       identifier: "",
       name: null,
       payment: null,
+      payments: null,
       payEnable: false
     };
 
@@ -39,6 +40,7 @@ class StudentPayments extends React.Component {
       this.setState({
         ...this.state,
         payment: payment.next_payment_date,
+        payments: payment.payments,
         payEnable: true
       });
     }
@@ -55,6 +57,7 @@ class StudentPayments extends React.Component {
 
   render() {
     let display = null;
+    let paymentsView = null;
     let title = "";
     title = "Pagos";
 
@@ -75,7 +78,16 @@ class StudentPayments extends React.Component {
       </div>
     );
 
-    let duePayment = <PaymentRow paymentDue={this.state.payment} />;
+    paymentsView = (
+      <div>
+        <h1>Historial de Pagos</h1>
+        {this.state.payments && this.state.payments.map((payment) => (
+          <PaymentRow title={''} paymentDue={payment.created_at} />
+        ))}
+      </div>
+    );
+
+    let duePayment = <PaymentRow title={'Proximo pago: '} paymentDue={this.state.payment} />;
 
     let payButton = (
       <Button
@@ -96,6 +108,7 @@ class StudentPayments extends React.Component {
         {this.state.payment != null ? duePayment : null}
         <br></br>
         {payButton}
+        {this.state.payments && paymentsView}
       </div>
     );
   }
