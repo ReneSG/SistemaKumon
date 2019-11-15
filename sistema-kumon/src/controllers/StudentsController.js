@@ -47,7 +47,7 @@ export const registerStudent = async (
   };
 
   try {
-    const response = await axios({url: url, method: method, data: reqBody, headers: { ...headers }});
+    const response = await axios({ url: url, method: method, data: reqBody, headers: { ...headers } });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -127,7 +127,7 @@ export const getStudent = async id => {
     }
     const response = await axios.get(url, { headers });
     return response.data;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     return false;
   }
