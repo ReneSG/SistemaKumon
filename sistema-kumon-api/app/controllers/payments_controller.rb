@@ -17,6 +17,7 @@ class PaymentsController < ApplicationController
   def create
     @student = Student.find_by(identifier: params[:student_id])
     @student.next_payment_date = @student.next_payment_date + 1.month
+    @student.save
     @payment = @student.payments.new(payment_params)
     @payment.month = (@student.next_payment_date - 1.month).month
 

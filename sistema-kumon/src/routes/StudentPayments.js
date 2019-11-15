@@ -78,11 +78,26 @@ class StudentPayments extends React.Component {
       </div>
     );
 
+    let numberToMonth = {
+      1: 'Enero',
+      2: 'Febrero',
+      3: 'Marzo',
+      4: 'Abril',
+      5: 'Mayo',
+      6: 'Junio',
+      7: 'Julio',
+      8: 'Agosto',
+      9: 'Septiembre',
+      10: 'Octubre',
+      11: 'Noviembre',
+      12: 'Diciembre',
+    }
+
     paymentsView = (
       <div>
         <h1>Historial de Pagos</h1>
         {this.state.payments && this.state.payments.map((payment) => (
-          <PaymentRow title={`${payment.month} - `} paymentDue={payment.created_at} />
+          <PaymentRow title={`Pago de ${numberToMonth[payment.month]} - `} paymentDue={payment.created_at} />
         ))}
       </div>
     );
