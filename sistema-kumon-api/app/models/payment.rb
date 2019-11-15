@@ -3,7 +3,7 @@ class Payment < ApplicationRecord
   before_create :set_month
 
   def set_month
-    self.month = if self.student.payments
+    self.month = if !self.student.payments.empty?
                     (self.student.payments.last.month % 12) + 1
                  else
                     Time.now.month

@@ -82,7 +82,7 @@ class StudentPayments extends React.Component {
       <div>
         <h1>Historial de Pagos</h1>
         {this.state.payments && this.state.payments.map((payment) => (
-          <PaymentRow title={''} paymentDue={payment.created_at} />
+          <PaymentRow title={`${payment.month} - `} paymentDue={payment.created_at} />
         ))}
       </div>
     );
