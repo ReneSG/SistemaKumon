@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: [:show, :update, :destroy, :mark_attendance, :all_payments]
+  before_action :set_student, only: [:show, :update, :destroy, :all_payments]
 
   # GET /students
   def index
