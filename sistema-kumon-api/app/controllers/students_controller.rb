@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   # GET /students
   def index
     authorize Student
-    @students = Student.all
+    @students = Student.where(active: true)
     render json: @students.to_json(methods: [:next_payment_date])
   end
 
@@ -19,6 +19,7 @@ class StudentsController < ApplicationController
   def create
     authorize Student
     @student = Student.new(student_params)
+    @student.active = true
     @school = maybe_update_or_create_school
     @student.school_id = @school.id
     if @student.save
@@ -44,6 +45,16 @@ class StudentsController < ApplicationController
   def destroy
     authorize @student
     @student.destroy
+  end
+
+  def set_to_inactive
+    authorize @student
+    @student.active = false
+    if @student.save
+      render status: 204
+    else
+      render status: 404, json: {"errors": "Error dando de baja al estudiante."}
+    end
   end
 
   def next_payment_date

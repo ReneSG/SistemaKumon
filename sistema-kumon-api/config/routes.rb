@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :payments
   get 'student/:student_id/next_payment_date', to: 'students#next_payment_date'
   post '/student/mark_attendance', to: 'students#mark_attendance'
+  post '/student/set_to_inactive', to: 'students#set_to_inactive'
 end
