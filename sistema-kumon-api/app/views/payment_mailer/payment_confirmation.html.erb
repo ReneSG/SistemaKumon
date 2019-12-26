@@ -1,19 +1,63 @@
 <!DOCTYPE html>
+<style type="text/css" media="all">
+body {
+  font-family: Roboto;
+  background-color: #f0f2f5;
+  height: 100%;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+table {
+  background-color: #d3d3d3;
+}
+
+th {
+  border: 1px solid #FFF;
+  padding: 10px 100px;
+}
+
+td {
+  text-align: center;
+  border: 1px solid #FFF;
+}
+
+.main-element {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  padding-bottom: 50px;
+}
+</style>
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1> Comprobante de pago - Kumon Escobedo Centro</h1>
-    <table>
-      <tr>
-        <th>Concepto</th>
-        <th>Cantidad</th>
-      </tr>
-      <tr>
-        <td>Pago de mensualidad</td>
-        <td>1000.00 MXN</td>
-      </tr>
-    </table>
+    <div class="centered">
+      <div class="main-element">
+        <h2>Kumon Escobedo Centro</h2>
+        <h2>Comprobante de Pago</h2>
+        <table>
+          <tr>
+            <th>Concepto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+          </tr>
+          <tr>
+            <td>Pago de mensualidad</td>
+            <td>1100.00 MXN</td>
+            <td><%= Time.now.in_time_zone('Mexico City').to_date.to_s(:long) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
