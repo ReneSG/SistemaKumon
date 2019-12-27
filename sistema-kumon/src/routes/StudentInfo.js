@@ -21,6 +21,7 @@ class StudentInfo extends React.Component {
     if(student) {
       student.guardian = student.guardians[0];
       student.gender = student.gender === "male" ? 0 : 1;
+      student.active = student.active ? 1 : 0;
       student.school_name = student.school.name;
     } else {
       notification.error({

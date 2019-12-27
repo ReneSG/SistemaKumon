@@ -21,9 +21,10 @@ const attributes = [
   ["last_name_mother", "Apellido materno", TextInput],
   ["identifier", "Matricula", TextInput],
   ["date_of_birth", "Fecha de nacimiento", DateInput],
-  ["gender", "Genero", GenderInput],
+  ["gender", "Genero", GenderInput, {firstOption: "Masculino", secondOption: "Femenino"}],
   ["phone", "Telefono", TextInput],
-  ["medical_instructions", "Cuestiones médicas", TextAreaInput]
+  ["medical_instructions", "Cuestiones médicas", TextAreaInput],
+  ["active", "Estado del alumno", GenderInput, {firstOption: "Inactivo", secondOption: "Activo", defaultValue: 1}]
 ];
 
 class StudentFormComponent extends React.Component {
@@ -83,6 +84,7 @@ class StudentFormComponent extends React.Component {
           values.gender,
           values.phone,
           values.medical_instructions,
+          values.active,
           school_object,
           {
             ...address_id,
@@ -125,7 +127,6 @@ class StudentFormComponent extends React.Component {
               'Favor de revisar que la matricula no sea repetida.',
           });
         }
-        
       }
     });
   }
@@ -133,7 +134,8 @@ class StudentFormComponent extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    let inputs = attributes.map(([key, value, Tag]) => {
+    console.log(this.props)
+    let inputs = attributes.map(([key, value, Tag, extraArgs]) => {
       return (
         <Tag
           key={key}
@@ -141,6 +143,7 @@ class StudentFormComponent extends React.Component {
           name={value}
           value={this.props[key]}
           getFieldDecorator={getFieldDecorator}
+          extraArgs={extraArgs}
         />
       );
     });

@@ -5,7 +5,8 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-function GenderInput({fieldKey, name, value, getFieldDecorator}) {
+function GenderInput({fieldKey, name, value, getFieldDecorator, extraArgs}) {
+  const defaultValue = value == null ? extraArgs.defaultValue : value;
   return (
     <FormInput name={name}>
       {getFieldDecorator(fieldKey, {
@@ -15,11 +16,11 @@ function GenderInput({fieldKey, name, value, getFieldDecorator}) {
             message: `El campo "${name}" es obligatorio!`,
           }
         ],
-        initialValue: value
+        initialValue: defaultValue
       })(
         <Select>
-          <Option value={0}>Masculino</Option>
-          <Option value={1}>Femenino</Option>
+          <Option value={0}>{extraArgs.firstOption}</Option>
+          <Option value={1}>{extraArgs.secondOption}</Option>
         </Select>
       )}
     </FormInput>
