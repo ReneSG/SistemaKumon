@@ -72,7 +72,7 @@ export default class AppLayout extends Component {
             </Menu.Item>
             <Menu.Item key="4">
               <Link to={"/attendances/today"}>
-                <Icon type="solution" />
+                <Icon type="unordered-list" />
                 <span className="nav-text">Lista de asistencia</span>
               </Link>
             </Menu.Item>
