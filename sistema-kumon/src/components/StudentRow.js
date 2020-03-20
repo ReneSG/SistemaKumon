@@ -5,12 +5,22 @@ import { DATE_FORMAT } from "../constants/dateFormat";
 import "moment/locale/es";
 import { Link } from "react-router-dom";
 
-function StudentRow({ studentId, identifier, name, paymentDue, index }) {
+function StudentRow({ studentId, identifier, name, paymentDue, index}) {
   const getRowClass = index => {
     return "studentRow" + (index % 2 === 0 ? " evenRow" : " oddRow");
   };
 
 
+  if(paymentDue == "" || paymentDue == undefined) {
+      return (
+    <div className={getRowClass(index)}>
+      <p>
+        <Link to={`/editStudent?studentId=${studentId}`}>{name}</Link>
+      </p>
+      <p>{identifier}</p>
+    </div>
+  );
+  }
 
   return (
     <div className={getRowClass(index)}>
