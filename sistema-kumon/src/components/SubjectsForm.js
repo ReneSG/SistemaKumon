@@ -5,9 +5,6 @@ import { Form, Input, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 class SubjectsForm extends React.Component {
-  onChange(checkedVal) {
-    console.log(checkedVal);
-  }
 
   render() {
     const subjects = this.props.subjects.map(({name, id}) => {
@@ -18,15 +15,16 @@ class SubjectsForm extends React.Component {
         <header className="Subject-header">
           <h2>Materias</h2>
         </header>
-        <Form.Item label="Nombre">
+        <Form.Item>
           {this.props.getFieldDecorator(this.props.formKey, {
             rules: [
               {
                 required: true,
-                message: `El campo "Escuela" es obligatorio!`,
+                message: `Selecciona al menos una materia.`,
               }
             ],
-          })(<CheckboxGroup options={subjects} defaultValue={[]} onChange={this.onChange} />
+            initialValue: []
+          })(<CheckboxGroup options={subjects} onChange={this.props.updateSubjectsHandler} />
           )}
         </Form.Item>
       </div>

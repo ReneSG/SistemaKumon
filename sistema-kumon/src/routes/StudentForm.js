@@ -38,6 +38,9 @@ class StudentFormComponent extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  updateSubjectsHandler(checkedValues) {
+  }
+
   async componentDidMount() {
     const schools = await getSchools();
     const subjects = await getSubjects();
@@ -51,6 +54,7 @@ class StudentFormComponent extends React.Component {
     e.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
+      console.log(values);
       if (!err) {
         let selected_school = this.state.schools.filter(
           school => school.name === values.school_selector
@@ -195,6 +199,7 @@ class StudentFormComponent extends React.Component {
             formKey="student_subjects_attributes"
             getFieldDecorator={getFieldDecorator}
             subjects={this.state.subjects}
+            updateSubjectsHandler={this.updateSubjectsHandler}
           />
           <Button htmlType="submit">Registrar</Button>
         </Form>
