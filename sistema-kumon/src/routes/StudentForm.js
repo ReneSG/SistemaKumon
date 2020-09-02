@@ -11,6 +11,7 @@ import AddressForm from "../components/AddressForm";
 import EmergencyContactForm from "../components/EmergencyContactForm";
 import GuardiansForm from "../components/GuardiansForm";
 import SchoolSelector from "../components/SchoolSelector";
+import SubjectsForm from "../components/SubjectsForm";
 
 import { registerStudent, getSubjects } from "../controllers/StudentsController";
 import { getSchools } from "../controllers/SchoolsController";
@@ -31,7 +32,8 @@ class StudentFormComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      schools: []
+      schools: [],
+      subjects: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -188,6 +190,11 @@ class StudentFormComponent extends React.Component {
             formKey="emergency_contact_attributes"
             getFieldDecorator={getFieldDecorator}
             {...this.props.emergency_contact}
+          />
+          <SubjectsForm
+            formKey="student_subjects_attributes"
+            getFieldDecorator={getFieldDecorator}
+            subjects={this.state.subjects}
           />
           <Button htmlType="submit">Registrar</Button>
         </Form>
