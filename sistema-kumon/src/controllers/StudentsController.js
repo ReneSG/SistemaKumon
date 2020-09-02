@@ -71,6 +71,20 @@ export const getStudents = async () => {
   }
 };
 
+export const getSubjects = async () => {
+  let url = API_URL + "/subjects";
+  try {
+    const headers = {
+      Authorization: "Bearer " + sessionStorage.getItem(TOKEN)
+    };
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 export const getNextPayment = async identifier => {
   let url = API_URL + "/student/" + identifier + "/next_payment_date";
   try {

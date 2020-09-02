@@ -12,7 +12,7 @@ import EmergencyContactForm from "../components/EmergencyContactForm";
 import GuardiansForm from "../components/GuardiansForm";
 import SchoolSelector from "../components/SchoolSelector";
 
-import { registerStudent } from "../controllers/StudentsController";
+import { registerStudent, getSubjects } from "../controllers/StudentsController";
 import { getSchools } from "../controllers/SchoolsController";
 
 const attributes = [
@@ -38,8 +38,10 @@ class StudentFormComponent extends React.Component {
 
   async componentDidMount() {
     const schools = await getSchools();
+    const subjects = await getSubjects();
     this.setState({
-      schools: schools
+      schools: schools,
+      subjects: subjects
     });
   }
 
