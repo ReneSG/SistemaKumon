@@ -12,8 +12,10 @@ class Student < ApplicationRecord
   has_one :hear_about_interview, dependent: :destroy
   has_one :reason_to_join_interview, dependent: :destroy
   has_one :expected_results_interview, dependent: :destroy
+  has_many :student_subjects
+  has_many :subjects, through: :student_subjects
 
-  accepts_nested_attributes_for :address, :emergency_contact, :guardians
+  accepts_nested_attributes_for :address, :emergency_contact, :guardians, :student_subjects
 
   def set_next_payment_date
     self.next_payment_date = self.created_at + 1.month
