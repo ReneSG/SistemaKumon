@@ -70,12 +70,13 @@ export default class AppLayout extends Component {
                 <span className="nav-text">Toma de asistencia</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="4">
+            {is_admin && (<Menu.Item key="4">
               <Link to={"/attendances/today"}>
                 <Icon type="unordered-list" />
                 <span className="nav-text">Lista de asistencia</span>
               </Link>
             </Menu.Item>
+            )}
             {is_admin && <Menu.Item key="2">
               <Link to={"/student/payments"}>
                 <Icon type="pay-circle" />
