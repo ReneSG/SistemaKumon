@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 class SubjectsForm extends React.Component {

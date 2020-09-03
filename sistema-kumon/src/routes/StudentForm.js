@@ -33,12 +33,16 @@ class StudentFormComponent extends React.Component {
     super(props);
     this.state = {
       schools: [],
-      subjects: []
+      subjects: [],
+      selectedSubjects: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateSubjectsHandler = this.updateSubjectsHandler.bind(this);
   }
 
-  updateSubjectsHandler(checkedValues) {
+  updateSubjectsHandler(checkedSubjectsIds) {
+    this.state.selectedSubjects = checkedSubjectsIds;
+    debugger;
   }
 
   async componentDidMount() {
