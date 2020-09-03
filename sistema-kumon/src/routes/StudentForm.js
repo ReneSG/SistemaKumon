@@ -84,6 +84,9 @@ class StudentFormComponent extends React.Component {
           ec_id = { id: this.props.emergency_contact.id };
         }
 
+        if (this.props.subjects) {
+        }
+
         const selected_subjects = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
 
         let response = await registerStudent(
@@ -202,8 +205,9 @@ class StudentFormComponent extends React.Component {
           <SubjectsForm
             formKey="student_subjects_attributes"
             getFieldDecorator={getFieldDecorator}
-            subjects={this.state.subjects}
+            subjectOptions={this.state.subjects}
             updateSubjectsHandler={this.updateSubjectsHandler}
+            subjects={this.props.subjects}
           />
           <Button htmlType="submit">Registrar</Button>
         </Form>
