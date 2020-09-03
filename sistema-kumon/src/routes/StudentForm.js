@@ -87,9 +87,9 @@ class StudentFormComponent extends React.Component {
         }
 
 
-        var selected_subjects = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
+        var subjects_to_be_added_or_updated = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
         if (this.props.subjects) {
-          selected_subjects = selected_subjects.map(({subject_id, student_id}) => {
+          subjects_to_be_added_or_updated = subjects_to_be_added_or_updated.map(({subject_id, student_id}) => {
             const subjectAleadyExist = this.props.student_subjects.filter(el => el.subject_id == subject_id);
             if(subjectAleadyExist.length != 0) {
               return {id: subjectAleadyExist[0].id, subject_id: subject_id, student_id: student_id}
@@ -99,6 +99,12 @@ class StudentFormComponent extends React.Component {
           });
         }
 
+        var subjects_to_be_deleted = this.props.student_subjects.map(({id, subject_id}) => {return {id: id, subject_id: subject_id, "_destroy": true};});
+        if (this.props.subjects) {
+          subjects_to_be_deleted = subjects_to_be_deleted.filter(({subject_id}) => {return !this.state.selectedSubjects.includes(subject_id)});
+        }
+
+        const student_subjects_attributes = subjects_to_be_added_or_updated.concat(subjects_to_be_deleted)
 
         let response = await registerStudent(
           this.props.id,
@@ -139,19 +145,19 @@ class StudentFormComponent extends React.Component {
             phone: values.guardian_phone,
             job: values.guardian_job
           },
-          selected_subjects
+          student_subjects_attributes
         );
         if (response) {
           notification.success({
             message: 'Éxito!',
             description:
-              'El estudiante se ha guardado correctamente.',
+            'El estudiante se ha guardado correctamente.',
           });
         } else {
           notification.error({
             message: 'Error al registrar el estudiante!',
             description:
-              'Favor de revisar que la matricula no sea repetida.',
+            'Favor de revisar que la matricula no sea repetida.',
           });
         }
       }
@@ -164,12 +170,12 @@ class StudentFormComponent extends React.Component {
     let inputs = attributes.map(([key, value, Tag, extraArgs]) => {
       return (
         <Tag
-          key={key}
-          fieldKey={key}
-          name={value}
-          value={this.props[key]}
-          getFieldDecorator={getFieldDecorator}
-          extraArgs={extraArgs}
+        key={key}
+        fieldKey={key}
+        name={value}
+        value={this.props[key]}
+        getFieldDecorator={getFieldDecorator}
+        extraArgs={extraArgs}
         />
       );
     });
@@ -187,41 +193,41 @@ class StudentFormComponent extends React.Component {
 
     return (
       <div className="Login">
-        <header className="Login-header">
-          <h1>{this.props.purpose}</h1>
-        </header>
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          {inputs}
-          <SchoolSelector
-            formKey="school_selector"
-            schools={this.state.schools}
-            school={this.props.school_name}
-            getFieldDecorator={getFieldDecorator}
-          />
-          <GuardiansForm
-            formKey="guardians_attributes"
-            getFieldDecorator={getFieldDecorator}
-            {...this.props.guardian}
-          />
-          <AddressForm
-            formKey="address_attributes"
-            getFieldDecorator={getFieldDecorator}
-            {...this.props.address}
-          />
-          <EmergencyContactForm
-            formKey="emergency_contact_attributes"
-            getFieldDecorator={getFieldDecorator}
-            {...this.props.emergency_contact}
-          />
-          <SubjectsForm
-            formKey="student_subjects_attributes"
-            getFieldDecorator={getFieldDecorator}
-            subjectOptions={this.state.subjects}
-            updateSubjectsHandler={this.updateSubjectsHandler}
-            subjects={this.props.subjects}
-          />
-          <Button htmlType="submit">Registrar</Button>
-        </Form>
+      <header className="Login-header">
+      <h1>{this.props.purpose}</h1>
+      </header>
+      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+      {inputs}
+      <SchoolSelector
+      formKey="school_selector"
+      schools={this.state.schools}
+      school={this.props.school_name}
+      getFieldDecorator={getFieldDecorator}
+      />
+      <GuardiansForm
+      formKey="guardians_attributes"
+      getFieldDecorator={getFieldDecorator}
+      {...this.props.guardian}
+      />
+      <AddressForm
+      formKey="address_attributes"
+      getFieldDecorator={getFieldDecorator}
+      {...this.props.address}
+      />
+      <EmergencyContactForm
+      formKey="emergency_contact_attributes"
+      getFieldDecorator={getFieldDecorator}
+      {...this.props.emergency_contact}
+      />
+      <SubjectsForm
+      formKey="student_subjects_attributes"
+      getFieldDecorator={getFieldDecorator}
+      subjectOptions={this.state.subjects}
+      updateSubjectsHandler={this.updateSubjectsHandler}
+      subjects={this.props.subjects}
+      />
+      <Button htmlType="submit">Registrar</Button>
+      </Form>
       </div>
     );
   }
