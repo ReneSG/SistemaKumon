@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { TOKEN } from "./constants/sessionstorage";
 import AppLayout from "./components/AppLayout";
 import StudentPayments from "./routes/StudentPayments";
+import Attendance from "./routes/Attendance";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -55,6 +56,11 @@ function RouterSwitch() {
         <PrivateRoute admin path="/student/payments">
           <AppLayout>
             <StudentPayments />
+          </AppLayout>
+        </PrivateRoute>
+        <PrivateRoute admin path="/attendances/today">
+          <AppLayout>
+            <Attendance />
           </AppLayout>
         </PrivateRoute>
         <Route path="/">

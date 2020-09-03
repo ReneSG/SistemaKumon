@@ -67,9 +67,16 @@ export default class AppLayout extends Component {
             <Menu.Item key="1">
               <Link to={"/student/mark_attendance"}>
                 <Icon type="solution" />
-                <span className="nav-text">Asistencia</span>
+                <span className="nav-text">Toma de asistencia</span>
               </Link>
             </Menu.Item>
+            {is_admin && (<Menu.Item key="4">
+              <Link to={"/attendances/today"}>
+                <Icon type="unordered-list" />
+                <span className="nav-text">Lista de asistencia</span>
+              </Link>
+            </Menu.Item>
+            )}
             {is_admin && <Menu.Item key="2">
               <Link to={"/student/payments"}>
                 <Icon type="pay-circle" />
