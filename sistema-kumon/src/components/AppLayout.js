@@ -76,12 +76,13 @@ export default class AppLayout extends Component {
                 <span className="nav-text">Lista de asistencia</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            {is_admin && <Menu.Item key="2">
               <Link to={"/student/payments"}>
                 <Icon type="pay-circle" />
                 <span className="nav-text">Pagos</span>
               </Link>
             </Menu.Item>
+            }
             <Menu.Item
               key="3"
               onClick={e => {
