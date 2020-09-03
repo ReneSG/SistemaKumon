@@ -12,7 +12,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   def show
     authorize @student
-    render json: @student.to_json(include: [:address, :guardians, :emergency_contact, :school])
+    render json: @student.to_json(include: [:address, :guardians, :emergency_contact, :school, :subjects, :student_subjects])
   end
 
   # POST /students
@@ -89,6 +89,7 @@ class StudentsController < ApplicationController
     params.require(:student).permit(:name, :active, :last_name_father, :last_name_mother, :identifier, :date_of_birth, :gender, :phone, :medical_instructions, :school_id, :address_id, :emergency_contact_id,
                                     address_attributes: [:id, :street_name, :ext_num, :int_num, :neighborhood, :city, :state, :zipcode, :between_street_a, :between_street_b],
                                     emergency_contact_attributes: [:id, :name, :phone, :cellphone],
-                                    guardians_attributes: [:id, :name, :last_name_father, :last_name_mother, :email, :phone, :job])
+                                    guardians_attributes: [:id, :name, :last_name_father, :last_name_mother, :email, :phone, :job],
+                                    student_subjects_attributes: [:id, :student_id, :subject_id, :_destroy])
   end
 end
