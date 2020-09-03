@@ -16,7 +16,8 @@ export const registerStudent = async (
   school_attributes,
   address_attributes,
   emergency_contact_attributes,
-  guardians_attributes
+  guardians_attributes,
+  student_subjects_attributes
 ) => {
   var url = API_URL + "/students";
   let reqBody = {
@@ -32,7 +33,8 @@ export const registerStudent = async (
     school_attributes: school_attributes,
     address_attributes: address_attributes,
     emergency_contact_attributes: emergency_contact_attributes,
-    guardians_attributes: [guardians_attributes]
+    guardians_attributes: [guardians_attributes],
+    student_subjects_attributes: student_subjects_attributes
   };
 
   let method = "post";

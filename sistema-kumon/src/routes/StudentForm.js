@@ -42,7 +42,6 @@ class StudentFormComponent extends React.Component {
 
   updateSubjectsHandler(checkedSubjectsIds) {
     this.state.selectedSubjects = checkedSubjectsIds;
-    debugger;
   }
 
   async componentDidMount() {
@@ -86,6 +85,8 @@ class StudentFormComponent extends React.Component {
           ec_id = { id: this.props.emergency_contact.id };
         }
 
+        const selected_subjects = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
+
         let response = await registerStudent(
           this.props.id,
           values.name,
@@ -124,7 +125,8 @@ class StudentFormComponent extends React.Component {
             email: values.guardian_email,
             phone: values.guardian_phone,
             job: values.guardian_job
-          }
+          },
+          selected_subjects
         );
         if (response) {
           notification.success({
