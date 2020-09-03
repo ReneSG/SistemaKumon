@@ -47,9 +47,11 @@ class StudentFormComponent extends React.Component {
   async componentDidMount() {
     const schools = await getSchools();
     const subjects = await getSubjects();
+    const selectedSubjects = this.props.subjects.map(({name, id}) => {return id});
     this.setState({
       schools: schools,
-      subjects: subjects
+      subjects: subjects,
+      selectedSubjects: selectedSubjects
     });
   }
 
@@ -84,10 +86,19 @@ class StudentFormComponent extends React.Component {
           ec_id = { id: this.props.emergency_contact.id };
         }
 
+
+        var selected_subjects = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
         if (this.props.subjects) {
+          selected_subjects = selected_subjects.map(({subject_id, student_id}) => {
+            const subjectAleadyExist = this.props.student_subjects.filter(el => el.subject_id == subject_id);
+            if(subjectAleadyExist.length != 0) {
+              return {id: subjectAleadyExist[0].id, subject_id: subject_id, student_id: student_id}
+            } else {
+              return {subject_id: subject_id, student_id: student_id}
+            }
+          });
         }
 
-        const selected_subjects = this.state.selectedSubjects.map(id => {return {subject_id: id, student_id: this.props.id};});
 
         let response = await registerStudent(
           this.props.id,
