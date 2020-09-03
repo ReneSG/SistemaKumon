@@ -57,7 +57,6 @@ class StudentFormComponent extends React.Component {
     e.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
-      console.log(values);
       if (!err) {
         let selected_school = this.state.schools.filter(
           school => school.name === values.school_selector
@@ -148,7 +147,6 @@ class StudentFormComponent extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    console.log(this.props)
     let inputs = attributes.map(([key, value, Tag, extraArgs]) => {
       return (
         <Tag
